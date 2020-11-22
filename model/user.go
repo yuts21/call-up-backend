@@ -1,13 +1,14 @@
 package model
 
 import (
+	"github.com/jinzhu/gorm"
 	"golang.org/x/crypto/bcrypt"
-	"time"
 )
 
 // User 用户模型
 type User struct {
-	UserID         string `gorm:"primary_key"`
+	gorm.Model
+	UserID         string `gorm:"unique"`
 	PasswordDigest string
 	Type           bool
 	UserName       string
@@ -17,8 +18,6 @@ type User struct {
 	Level          uint8
 	Introduction   string `gorm:"type:text"`
 	RegCity        string
-	RegTime        time.Time
-	ModifyTime     time.Time
 }
 
 // PassWordCost 密码加密难度

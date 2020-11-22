@@ -3,7 +3,7 @@ package conf
 import (
 	"call-up/cache"
 	"call-up/model"
-	"call-up/util"
+	"log"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -19,11 +19,11 @@ func Init() {
 	gin.SetMode(os.Getenv("GIN_MODE"))
 
 	// 设置日志级别
-	util.BuildLogger(os.Getenv("LOG_LEVEL"))
+	// util.BuildLogger(os.Getenv("LOG_LEVEL"))
 
 	// 读取翻译文件
 	if err := LoadLocales("conf/locales/zh-cn.yaml"); err != nil {
-		util.Log().Panic("翻译文件加载失败", err)
+		log.Panic("翻译文件加载失败", err)
 	}
 
 	// 连接数据库

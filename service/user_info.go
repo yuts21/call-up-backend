@@ -6,13 +6,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// UserInfoService 用户信息服务
-type UserInfoService struct {
-	UserID string `form:"user_id" json:"user_id" binding:"required,min=4,max=16"`
+// UserInfo 用户信息服务
+type UserInfo struct {
+	UserID string `form:"user" json:"user" binding:"required,min=4,max=16"`
 }
 
 // Info 用户信息函数
-func (service *UserInfoService) Info(c *gin.Context) serializer.Response {
+func (service *UserInfo) Info(c *gin.Context) serializer.Response {
 	curUser, _ := c.Get("user")
 
 	if service.UserID != curUser.(*model.User).UserID {

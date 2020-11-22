@@ -3,6 +3,7 @@ package main
 import (
 	"call-up/conf"
 	"call-up/server"
+	"log"
 )
 
 func main() {
@@ -11,5 +12,7 @@ func main() {
 
 	// 装载路由
 	r := server.NewRouter()
-	r.Run(":3000")
+	if err := r.Run(":3000"); err != nil {
+		log.Fatal(err.Error())
+	}
 }

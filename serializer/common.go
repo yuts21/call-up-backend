@@ -4,10 +4,10 @@ import "github.com/gin-gonic/gin"
 
 // Response 基础序列化器
 type Response struct {
-	Code  int         `json:"status"`
-	Data  interface{} `json:"result,omitempty"`
-	Msg   string      `json:"message"`
-	Error string      `json:"error,omitempty"`
+	Code  int         `json:"code"`
+	Data  interface{} `json:"res,omitempty"`
+	Msg   string      `json:"msg"`
+	Error string      `json:"err,omitempty"`
 }
 
 // TrackedErrorResponse 有追踪信息的错误响应
@@ -21,6 +21,8 @@ type TrackedErrorResponse struct {
 // 五开头的五位数错误编码为服务器端错误，比如数据库操作失败
 // 四开头的五位数错误编码为房客端错误，有时候是房客端代码写错了，有时候是用户操作错误
 const (
+	// CodeSuccess 成功
+	CodeSuccess = 200
 	// CodeCheckLogin 未登录
 	CodeCheckLogin = 401
 	// CodeNoRightErr 未授权访问
@@ -56,3 +58,11 @@ func Err(errCode int, msg string, err error) Response {
 	return res
 }
 
+// Success 通用成功处理
+func Success(msg string) Response {
+	res := Response{
+		Code: CodeSuccess,
+		Msg: msg,
+	}
+	return res
+}

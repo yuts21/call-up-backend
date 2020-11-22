@@ -1,9 +1,9 @@
 package model
 
 import (
-	"call-up/util"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"log"
 	"time"
 )
 
@@ -15,7 +15,7 @@ func Database(connString string) {
 	db, err := gorm.Open("mysql", connString)
 	// Error
 	if err != nil {
-		util.Log().Panic("连接数据库不成功", err)
+		log.Panic("连接数据库不成功", err)
 	}
 
 	db.LogMode(true)
