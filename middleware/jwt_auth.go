@@ -6,7 +6,6 @@ import (
 	"call-up/service"
 	"github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
-	"net/http"
 	"os"
 	"strconv"
 	"time"
@@ -48,7 +47,7 @@ func GinJWTMiddlewareInit() (authMiddleware *jwt.GinJWTMiddleware, err error) {
 			print(2)
 			user, err := c.Get("user")
 			print(err)
-			c.JSON(http.StatusOK, serializer.BuildUserLoginResponse(user.(*model.User).ID, token, expire))
+			c.JSON(code, serializer.BuildUserLoginResponse(user.(*model.User).ID, token, expire))
 		},
 		IdentityHandler: func(c *gin.Context) interface{} {
 			claims := jwt.ExtractClaims(c)
@@ -73,14 +72,11 @@ func GinJWTMiddlewareInit() (authMiddleware *jwt.GinJWTMiddleware, err error) {
 			return false
 		},
 		Unauthorized: func(c *gin.Context, code int, message string) {
-			c.JSON(code, serializer.Response{
-				Code: code,
-				Msg: message,
-			})
+			c.JSON(code, serializer.Err(serializer.CodeCheckLogin, message, nil))
 		},
 		RefreshResponse: func(c *gin.Context, code int, token string, expire time.Time) {
 			user, _ := c.Get("user")
-			c.JSON(http.StatusOK, serializer.BuildUserLoginResponse(user.(*model.User).ID, token, expire))
+			c.JSON(code, serializer.BuildUserLoginResponse(user.(*model.User).ID, token, expire))
 		},
 		// TokenLookup is a string in the form of "<source>:<name>" that is used
 		// to extract token from the request.
@@ -90,7 +86,7 @@ func GinJWTMiddlewareInit() (authMiddleware *jwt.GinJWTMiddleware, err error) {
 		// - "query:<name>"
 		// - "cookie:<name>"
 		// - "param:<name>"
-		TokenLookup: "header: Authorization, query: token, cookie: jwt",
+		TokenLookup: "header: Authorization, query: token, cookie: token",
 		// TokenLookup: "query:token",
 		// TokenLookup: "cookie:token",
 
