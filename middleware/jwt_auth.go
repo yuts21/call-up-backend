@@ -86,7 +86,7 @@ func GinJWTMiddlewareInit() (authMiddleware *jwt.GinJWTMiddleware, err error) {
 		// - "query:<name>"
 		// - "cookie:<name>"
 		// - "param:<name>"
-		TokenLookup: "header: Authorization, query: token, cookie: token",
+		TokenLookup: "header: Authorization, query: token, cookie: jwt",
 		// TokenLookup: "query:token",
 		// TokenLookup: "cookie:token",
 
