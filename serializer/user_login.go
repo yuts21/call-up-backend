@@ -9,7 +9,7 @@ type UserLogin struct {
 	Expire int64 `json:"expire"`
 }
 
-// BuildUserLoginResponse 序列化用户响应
+// BuildUserLoginResponse 序列化用户登录响应
 func BuildUserLoginResponse(ID uint, token string, expire time.Time) Response {
 	return Response{
 		Code: CodeSuccess,
@@ -18,5 +18,6 @@ func BuildUserLoginResponse(ID uint, token string, expire time.Time) Response {
 			Token: token,
 			Expire: expire.Unix(),
 		},
+		Msg: "登录成功",
 	}
 }

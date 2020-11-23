@@ -29,11 +29,10 @@ func GinJWTMiddlewareInit() (authMiddleware *jwt.GinJWTMiddleware, err error) {
 			if err := c.ShouldBind(&serv); err != nil {
 				return "", jwt.ErrMissingLoginValues
 			}
-			user, err := serv.Login()
-			if err {
+			if user, ok := serv.Login(); ok {
+				c.Set("user", user)
 				return user, nil
 			}
-			c.Set("user", user)
 			return nil, jwt.ErrFailedAuthentication
 		},
 		PayloadFunc: func(data interface{}) jwt.MapClaims {
@@ -46,7 +45,9 @@ func GinJWTMiddlewareInit() (authMiddleware *jwt.GinJWTMiddleware, err error) {
 			return jwt.MapClaims{}
 		},
 		LoginResponse: func(c *gin.Context, code int, token string, expire time.Time) {
-			user, _ := c.Get("user")
+			print(2)
+			user, err := c.Get("user")
+			print(err)
 			c.JSON(http.StatusOK, serializer.BuildUserLoginResponse(user.(*model.User).ID, token, expire))
 		},
 		IdentityHandler: func(c *gin.Context) interface{} {

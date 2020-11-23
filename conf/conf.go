@@ -18,9 +18,6 @@ func Init() {
 	//设置GIN模式
 	gin.SetMode(os.Getenv("GIN_MODE"))
 
-	// 设置日志级别
-	// util.BuildLogger(os.Getenv("LOG_LEVEL"))
-
 	// 读取翻译文件
 	if err := LoadLocales("conf/locales/zh-cn.yaml"); err != nil {
 		log.Panic("翻译文件加载失败", err)

@@ -7,6 +7,8 @@ import (
 )
 
 func main() {
+	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
+
 	// 从配置文件读取配置
 	conf.Init()
 
