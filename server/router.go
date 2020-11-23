@@ -19,7 +19,7 @@ func NewRouter() *gin.Engine {
 	// JWT中间件
 	authMiddleware, err := middleware.GinJWTMiddlewareInit()
 	if err != nil {
-		log.Fatal("JWT Error:" + err.Error())
+		log.Fatal("JWT Error:", err.Error())
 	}
 
 	// When you use jwt.New(), the function is already automatically called for checking,
