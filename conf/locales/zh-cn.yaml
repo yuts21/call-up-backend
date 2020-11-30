@@ -3,7 +3,7 @@ Tag:
   min: "不够长"
   max: "太长"
 Field:
-  Username: "用户名"
+  Name: "用户名"
   Password: "密码"
   RoomID: "房间号"
   IDNumber: "身份证号"

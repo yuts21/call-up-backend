@@ -24,7 +24,7 @@ func (service *UserInfo) Info(c *gin.Context) serializer.Response {
 		return serializer.Err(serializer.CodeParamErr, "用户不存在", nil)
 	}
 
-	resp := serializer.BuildUserResponse(user)
+	resp := serializer.BuildUserInfoResponse(user)
 	resp.Msg = "查询成功"
 	return resp
 }

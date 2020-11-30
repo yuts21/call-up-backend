@@ -44,9 +44,7 @@ func GinJWTMiddlewareInit() (authMiddleware *jwt.GinJWTMiddleware, err error) {
 			return jwt.MapClaims{}
 		},
 		LoginResponse: func(c *gin.Context, code int, token string, expire time.Time) {
-			print(2)
-			user, err := c.Get("user")
-			print(err)
+			user, _ := c.Get("user")
 			c.JSON(code, serializer.BuildUserLoginResponse(user.(*model.User).ID, token, expire))
 		},
 		IdentityHandler: func(c *gin.Context) interface{} {

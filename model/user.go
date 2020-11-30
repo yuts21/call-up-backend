@@ -11,10 +11,10 @@ type User struct {
 	UserID         string `gorm:"unique"`
 	PasswordDigest string
 	Type           bool
-	UserName       string
+	Name       string
 	IDType         uint8
 	IDNumber       string
-	MobNumber      string `gorm:"size:11"`
+	Phone          string `gorm:"size:11"`
 	Level          uint8
 	Introduction   string `gorm:"type:text"`
 	RegCity        string
