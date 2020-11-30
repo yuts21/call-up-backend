@@ -45,8 +45,9 @@ func NewRouter() *gin.Engine {
 		{
 			userAuth.Use(authMiddleware.MiddlewareFunc())
 			userAuth.GET("refresh", authMiddleware.RefreshHandler)
+			userAuth.POST("user/logout", authMiddleware.LogoutHandler)
 			userAuth.GET("user/info", api.UserInfo)
-			userAuth.DELETE("user/logout", authMiddleware.LogoutHandler)
+			userAuth.POST("user/updatePasswd", api.UpdatePassword)
 		}
 	}
 	return r

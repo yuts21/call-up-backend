@@ -27,3 +27,14 @@ func UserInfo(c *gin.Context) {
 		c.JSON(200, ErrorResponse(err))
 	}
 }
+
+// UpdatePassword 修改密码
+func UpdatePassword(c *gin.Context) {
+	var serv service.UpdatePassword
+	if err := c.ShouldBind(&serv); err == nil {
+		res := serv.UpdatePassword(c)
+		c.JSON(200, res)
+	} else {
+		c.JSON(200, ErrorResponse(err))
+	}
+}
