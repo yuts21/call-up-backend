@@ -27,9 +27,9 @@ func UserInfo(c *gin.Context) {
 	}
 }
 
-// UpdatePassword 修改密码
-func UpdatePassword(c *gin.Context) {
-	var serv service.UpdatePassword
+// UserPasswordUpdate 修改密码
+func UserPasswordUpdate(c *gin.Context) {
+	var serv service.UserPasswordUpdate
 	if err := c.ShouldBind(&serv); err == nil {
 		res := serv.Update(c)
 		c.JSON(200, res)
@@ -38,9 +38,9 @@ func UpdatePassword(c *gin.Context) {
 	}
 }
 
-// UpdateUserInfo 修改用户信息
-func UpdateUserInfo(c *gin.Context) {
-	var serv service.UpdateUserInfo
+// UserInfoUpdate 修改用户信息
+func UserInfoUpdate(c *gin.Context) {
+	var serv service.UserInfoUpdate
 	if err := c.ShouldBind(&serv); err == nil {
 		res := serv.Update(c)
 		c.JSON(200, res)

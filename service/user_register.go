@@ -9,7 +9,7 @@ import (
 type UserRegister struct {
 	UserID       string `form:"user" json:"user" binding:"required,min=4,max=16"`
 	Password     string `form:"passwd" json:"passwd" binding:"required,min=6,max=16"`
-	Name         string `form:"name" json:"name"`
+	Name         string `form:"name" json:"name" binding:"required"`
 	IDType       uint8  `form:"id_type" json:"id_type" binding:"required"`
 	IDNumber     string `form:"id_number" json:"id_number" binding:"required"`
 	Phone        string `form:"phone" json:"phone" binding:"required,len=11"`

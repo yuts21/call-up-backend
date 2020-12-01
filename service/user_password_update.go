@@ -6,14 +6,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// UpdatePassword 修改密码服务
-type UpdatePassword struct {
+// UserPasswordUpdate 修改密码服务
+type UserPasswordUpdate struct {
 	Password    string `form:"passwd" json:"passwd" binding:"required,min=6,max=16"`
 	NewPassword string `form:"new_passwd" json:"new_passwd" binding:"required,min=6,max=16"`
 }
 
 // Update 修改密码函数
-func (service *UpdatePassword) Update(c *gin.Context) serializer.Response {
+func (service *UserPasswordUpdate) Update(c *gin.Context) serializer.Response {
 	curUser, _ := c.Get("user")
 	user := curUser.(*model.User)
 

@@ -2,8 +2,8 @@ package model
 
 import "github.com/jinzhu/gorm"
 
-// CallupRequest 召集令请求模型
-type CallupRequest struct {
+// Request 召集令请求模型
+type Request struct {
 	gorm.Model
 	CallupID    uint
 	Callup      Callup
@@ -15,8 +15,8 @@ type CallupRequest struct {
 
 // 状态码
 const (
-	Unprocessed uint = iota + 1
-	Agreed
-	Denied
-	Canceled
+	RequestUnprocessed uint8 = iota
+	RequestAgreed
+	RequestDenied
+	RequestCanceled
 )
