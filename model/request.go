@@ -2,7 +2,7 @@ package model
 
 import "github.com/jinzhu/gorm"
 
-// Request 召集令请求模型
+// Request 接令请求模型
 type Request struct {
 	gorm.Model
 	CallupID    uint
@@ -15,7 +15,7 @@ type Request struct {
 
 // 状态码
 const (
-	Unprocessed uint = iota + 1
+	Unprocessed uint8 = iota + 1
 	Agreed
 	Denied
 	Abolished
