@@ -12,8 +12,8 @@ type UpdatePassword struct {
 	NewPassword string `form:"new_passwd" json:"new_passwd" binding:"required,min=6,max=16"`
 }
 
-// UpdatePassword 修改密码函数
-func (service *UpdatePassword) UpdatePassword(c *gin.Context) serializer.Response {
+// Update 修改密码函数
+func (service *UpdatePassword) Update(c *gin.Context) serializer.Response {
 	curUser, _ := c.Get("user")
 	user := curUser.(*model.User)
 
