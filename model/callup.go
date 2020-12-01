@@ -16,13 +16,13 @@ type Callup struct {
 	Description string `gorm:"type:text"`
 	Capacity    uint
 	EndDate     time.Time `gorm:"type:date"`
-	Picture     []byte    `gorm:"type:blob"`
+	PicturePath string
 	Status      uint8
 }
 
 // 状态码
 const (
-	Waiting uint8 = iota
+	Waiting uint8 = iota + 1
 	Completed
 	Expired
 	Canceled
