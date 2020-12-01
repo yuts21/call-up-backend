@@ -17,21 +17,14 @@ type UserRegister struct {
 	RegCity        string `form:"city" json:"city"`
 }
 
-// valid 验证表单
-func (service *UserRegister) valid() *serializer.Response {
+// Register 用户注册
+func (service *UserRegister) Register() serializer.Response {
 	count := 0
 	model.DB.Model(&model.User{}).Where("user_id = ?", service.UserID).Count(&count)
 	if count > 0 {
-		return &serializer.Response{
-			Code: serializer.CodeParamErr,
-			Msg:  "该用户名已经注册",
-		}
+		return serializer.Err(serializer.CodeParamErr, "该用户名已经注册", nil)
 	}
-	return nil
-}
 
-// Register 用户注册
-func (service *UserRegister) Register() serializer.Response {
 	user := model.User{
 		UserID: service.UserID,
 		Name: service.Name,
@@ -40,11 +33,6 @@ func (service *UserRegister) Register() serializer.Response {
 		Phone: service.Phone,
 		Introduction: service.Introduction,
 		RegCity: service.RegCity,
-	}
-
-	// 表单验证
-	if err := service.valid(); err != nil {
-		return *err
 	}
 
 	// 加密密码

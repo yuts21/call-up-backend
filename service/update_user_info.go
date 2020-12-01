@@ -8,7 +8,7 @@ import (
 
 // UpdateUserInfo 修改用户信息服务
 type UpdateUserInfo struct {
-	Phone *string `form:"phone" json:"phone"`
+	Phone *string `form:"phone" json:"phone" binding:"omitempty,len=11"`
 	Introduction *string `form:"intro" json:"intro"`
 }
 
