@@ -24,11 +24,11 @@ func migration() {
 			RegCity: "北京市海淀区",
 		}
 		if err := admin.SetPassword(adminPassword); err != nil {
-			log.Fatal("管理员密码加密失败", err)
+			log.Fatal("管理员密码加密失败", err.Error())
 		}
 		// 创建用户
 		if err := DB.Create(&admin).Error; err != nil {
-			log.Fatal("管理员添加失败", err)
+			log.Fatal("管理员添加失败", err.Error())
 		}
 	}
 	DB.AutoMigrate(&Callup{})

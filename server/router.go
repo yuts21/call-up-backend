@@ -5,7 +5,6 @@ import (
 	"call-up/middleware"
 	"github.com/gin-gonic/gin"
 	"log"
-	"os"
 )
 
 // NewRouter 路由配置
@@ -13,7 +12,6 @@ func NewRouter() *gin.Engine {
 	r := gin.Default()
 
 	// 中间件, 顺序不能改
-	r.Use(middleware.Session(os.Getenv("SESSION_SECRET")))
 	r.Use(middleware.Cors())
 
 	// JWT中间件
@@ -24,10 +22,8 @@ func NewRouter() *gin.Engine {
 
 	// When you use jwt.New(), the function is already automatically called for checking,
 	// which means you don't need to call it again.
-	errInit := authMiddleware.MiddlewareInit()
-
-	if errInit != nil {
-		log.Fatal("authMiddleware.MiddlewareInit() Error:", errInit.Error())
+	if err := authMiddleware.MiddlewareInit(); err != nil {
+		log.Fatal("authMiddleware.MiddlewareInit() Error:", err.Error())
 	}
 
 	// 路由
