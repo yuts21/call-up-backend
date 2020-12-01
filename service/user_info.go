@@ -16,7 +16,7 @@ func (service *UserInfo) Info(c *gin.Context) serializer.Response {
 	curUser, _ := c.Get("user")
 
 	if service.ID != curUser.(*model.User).ID {
-		return serializer.Err(serializer.CodeParamErr, "无权限", nil)
+		return serializer.Err(serializer.CodeNoRightErr, "无权限", nil)
 	}
 
 	var user model.User

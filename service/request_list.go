@@ -24,6 +24,6 @@ func (service *RequestList) List(c *gin.Context) serializer.Response {
 	}
 
 	resp := serializer.BuildRequestListResponse(requests)
-	resp.Msg = "接令请求列表查询成功"
+	resp.Msg = "查询成功"
 	return resp
 }

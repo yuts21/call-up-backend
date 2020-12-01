@@ -25,7 +25,7 @@ func BuildRequestShow(request model.Request) Request {
 }
 
 // BuildRequestShowResponse 序列化接令请求查询响应
-func BuildRequestShowResponse(request model.Request) Response {
+func BuildRequestInfoResponse(request model.Request) Response {
 	return Response{
 		Code: CodeSuccess,
 		Data: BuildRequestShow(request),
