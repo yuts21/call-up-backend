@@ -6,14 +6,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// UpdateUserInfo 修改用户信息服务
-type UpdateUserInfo struct {
+// UserInfoUpdate 修改用户信息服务
+type UserInfoUpdate struct {
 	Phone        *string `form:"phone" json:"phone" binding:"omitempty,len=11"`
 	Introduction *string `form:"intro" json:"intro"`
 }
 
 // Update 修改用户信息函数
-func (service *UpdateUserInfo) Update(c *gin.Context) serializer.Response {
+func (service *UserInfoUpdate) Update(c *gin.Context) serializer.Response {
 	curUser, _ := c.Get("user")
 	user := curUser.(*model.User)
 

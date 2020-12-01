@@ -13,8 +13,16 @@ type Callup struct {
 	Type        uint8
 	Name        string
 	Description string `gorm:"type:text"`
-	NumPerson   uint
+	Capacity    uint
 	EndDate     time.Time `gorm:"type:date"`
 	Picture     []byte    `gorm:"type:blob"`
 	Status      uint8
 }
+
+// 状态码
+const (
+	CallupWaiting uint8 = iota
+	CallupCompleted
+	CallupExpired
+	CallupCanceled
+)

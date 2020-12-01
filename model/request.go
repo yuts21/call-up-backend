@@ -2,8 +2,8 @@ package model
 
 import "github.com/jinzhu/gorm"
 
-// CallupRequest 召集令请求模型
-type CallupRequest struct {
+// Request 召集令请求模型
+type Request struct {
 	gorm.Model
 	CallupID    uint
 	Callup      Callup
