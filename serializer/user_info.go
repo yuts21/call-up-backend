@@ -37,6 +37,7 @@ func BuildUserInfo(user model.User) UserInfo {
 // BuildUserInfoResponse 序列化用户信息响应
 func BuildUserInfoResponse(user model.User) Response {
 	return Response{
+		Code: CodeSuccess,
 		Data: BuildUserInfo(user),
 	}
 }
