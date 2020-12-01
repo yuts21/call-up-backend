@@ -15,6 +15,6 @@ type Callup struct {
 	Description string `gorm:"type:text"`
 	NumPerson   uint
 	EndDate     time.Time `gorm:"type:date"`
-	Picture     []byte `gorm:"type:blob"`
+	Picture     []byte    `gorm:"type:blob"`
 	Status      uint8
 }

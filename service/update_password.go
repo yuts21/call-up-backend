@@ -8,7 +8,7 @@ import (
 
 // UpdatePassword 修改密码服务
 type UpdatePassword struct {
-	Password string `form:"passwd" json:"passwd" binding:"required,min=6,max=16"`
+	Password    string `form:"passwd" json:"passwd" binding:"required,min=6,max=16"`
 	NewPassword string `form:"new_passwd" json:"new_passwd" binding:"required,min=6,max=16"`
 }
 
@@ -18,7 +18,7 @@ func (service *UpdatePassword) Update(c *gin.Context) serializer.Response {
 	user := curUser.(*model.User)
 
 	// 检查旧密码
-	if ! user.CheckPassword(service.Password) {
+	if !user.CheckPassword(service.Password) {
 		return serializer.Err(serializer.CodeParamErr, "密码错误", nil)
 	}
 

@@ -20,7 +20,7 @@ func GinJWTMiddlewareInit() (authMiddleware *jwt.GinJWTMiddleware, err error) {
 		Realm:       "call-up jwt",
 		Key:         []byte(jwtSecret),
 		Timeout:     3 * time.Hour,
-		MaxRefresh:  5 * time.Hour,
+		MaxRefresh:  3 * time.Hour,
 		IdentityKey: identityKey,
 		Authenticator: func(c *gin.Context) (interface{}, error) {
 			//handles the login logic. On success LoginResponse is called, on failure Unauthorized is called

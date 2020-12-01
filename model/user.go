@@ -11,7 +11,7 @@ type User struct {
 	UserID         string `gorm:"unique"`
 	PasswordDigest string
 	Type           bool
-	Name       string
+	Name           string
 	IDType         uint8
 	IDNumber       string
 	Phone          string `gorm:"size:11"`

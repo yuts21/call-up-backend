@@ -6,7 +6,7 @@ import (
 
 // UserLogin 用户登录服务
 type UserLogin struct {
-	UserID string `form:"user" json:"user" binding:"required,min=4,max=16"`
+	UserID   string `form:"user" json:"user" binding:"required,min=4,max=16"`
 	Password string `form:"passwd" json:"passwd" binding:"required,min=5,max=16"`
 }
 
@@ -17,7 +17,7 @@ func (service *UserLogin) Login() (*model.User, bool) {
 		return nil, false
 	}
 
-	if ! user.CheckPassword(service.Password) {
+	if !user.CheckPassword(service.Password) {
 		return nil, false
 	}
 
