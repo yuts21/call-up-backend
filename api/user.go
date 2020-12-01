@@ -2,6 +2,7 @@ package api
 
 import (
 	"call-up/service"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,7 +16,6 @@ func UserRegister(c *gin.Context) {
 		c.JSON(200, ErrorResponse(err))
 	}
 }
-
 
 // UserInfo 用户信息
 func UserInfo(c *gin.Context) {
