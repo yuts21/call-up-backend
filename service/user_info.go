@@ -8,19 +8,19 @@ import (
 
 // UserInfo 用户信息服务
 type UserInfo struct {
-	UserID string `form:"user" json:"user" binding:"required,min=4,max=16"`
+	ID uint `form:"UID" json:"UID" binding:"required"`
 }
 
 // Info 用户信息函数
 func (service *UserInfo) Info(c *gin.Context) serializer.Response {
 	curUser, _ := c.Get("user")
 
-	if service.UserID != curUser.(*model.User).UserID {
+	if service.ID != curUser.(*model.User).ID {
 		return serializer.Err(serializer.CodeParamErr, "无权限", nil)
 	}
 
 	var user model.User
-	if err := model.DB.Where("user_id = ?", service.UserID).First(&user).Error; err != nil {
+	if err := model.DB.Where("id = ?", service.ID).First(&user).Error; err != nil {
 		return serializer.Err(serializer.CodeParamErr, "用户不存在", nil)
 	}
 
