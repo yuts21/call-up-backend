@@ -21,8 +21,8 @@ type Callup struct {
 
 // 状态码
 const (
-	CallupWaiting uint8 = iota
-	CallupCompleted
-	CallupExpired
-	CallupCanceled
+	Waiting uint8 = iota
+	Completed
+	Expired
+	 Canceled
 )

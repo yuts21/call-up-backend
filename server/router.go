@@ -35,17 +35,24 @@ func NewRouter() *gin.Engine {
 		apis.POST("user/login", authMiddleware.LoginHandler)
 		apis.POST("user/reg", api.UserRegister)
 
-
-		// 需要用户登录保护的
-		userAuth := apis.Group("")
+		// 需要登录保护的
+		auth := apis.Group("")
 		{
-			userAuth.Use(authMiddleware.MiddlewareFunc())
-			userAuth.GET("refresh", authMiddleware.RefreshHandler)
-			userAuth.POST("user/logout", authMiddleware.LogoutHandler)
-			userAuth.POST("user/info", api.UserInfo)
-			userAuth.POST("user/updatePasswd", api.UserPasswordUpdate)
-			userAuth.POST("user/updateInfo", api.UserInfoUpdate)
+			auth.Use(authMiddleware.MiddlewareFunc())
+			auth.GET("refresh", authMiddleware.RefreshHandler)
+			auth.POST("user/logout", authMiddleware.LogoutHandler)
+			auth.POST("user/info", api.UserInfo)
+			auth.POST("user/updatePasswd", api.UserPasswordUpdate)
+			auth.POST("user/updateInfo", api.UserInfoUpdate)
+			// 需要普通用户权限的
+			playerAuth := apis.Group("")
+			{
+				playerAuth.Use(middleware.PlayerAuth())
+				playerAuth.POST("callup/create", api.CallupCreate)
+			}
 		}
+
+
 	}
 	return r
 }
