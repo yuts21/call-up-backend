@@ -33,8 +33,8 @@ const (
 	CodeEncryptError = 50002
 	//CodeParamErr 各种奇奇怪怪的参数错误
 	CodeParamErr = 40001
-	//SystemError 系统错误
-	SystemError = 40002
+	// CodeFileUploadError 文件上传错误
+	CodeFileUploadError = 40002
 )
 
 // Err 通用错误处理
