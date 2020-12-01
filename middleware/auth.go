@@ -3,15 +3,16 @@ package middleware
 import (
 	"call-up/model"
 	"call-up/serializer"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 // PlayerAuth 普通用户鉴权
 func PlayerAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		curUser, _ := c.Get("user")
-		if ! curUser.(*model.User).Type {
+		if !curUser.(*model.User).Type {
 			c.Next()
 			return
 		}
@@ -19,4 +20,3 @@ func PlayerAuth() gin.HandlerFunc {
 		c.Abort()
 	}
 }
-

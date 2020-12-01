@@ -3,8 +3,9 @@ package server
 import (
 	"call-up/api"
 	"call-up/middleware"
-	"github.com/gin-gonic/gin"
 	"log"
+
+	"github.com/gin-gonic/gin"
 )
 
 // NewRouter 路由配置
@@ -51,7 +52,6 @@ func NewRouter() *gin.Engine {
 				playerAuth.POST("callup/create", api.CallupCreate)
 			}
 		}
-
 
 	}
 	return r

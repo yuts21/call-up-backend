@@ -3,8 +3,9 @@ package service
 import (
 	"call-up/model"
 	"call-up/serializer"
-	"github.com/gin-gonic/gin"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 // CallupCreate 创建召集令服务
@@ -23,14 +24,14 @@ func (service *CallupCreate) Create(c *gin.Context) serializer.Response {
 	Lord := curUser.(*model.User)
 
 	callup := model.Callup{
-		LordID: Lord.ID,
-		Type: service.Type,
-		Name: service.Name,
+		LordID:      Lord.ID,
+		Type:        service.Type,
+		Name:        service.Name,
 		Description: service.Description,
-		Capacity: service.Capacity,
-		EndDate: time.Unix(service.EndDate, 0),
-		Picture: service.Picture,
-		Status: model.Waiting,
+		Capacity:    service.Capacity,
+		EndDate:     time.Unix(service.EndDate, 0),
+		Picture:     service.Picture,
+		Status:      model.Waiting,
 	}
 
 	if err := model.DB.Create(&callup).Error; err != nil {
