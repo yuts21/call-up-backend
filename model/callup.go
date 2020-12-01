@@ -1,8 +1,9 @@
 package model
 
 import (
-	"github.com/jinzhu/gorm"
 	"time"
+
+	"github.com/jinzhu/gorm"
 )
 
 // Callup 召集令模型
@@ -24,5 +25,5 @@ const (
 	Waiting uint8 = iota
 	Completed
 	Expired
-	 Canceled
+	Canceled
 )
