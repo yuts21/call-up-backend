@@ -5,6 +5,4 @@ Tag:
 Field:
   Name: "用户名"
   Password: "密码"
-  RoomID: "房间号"
-  IDNumber: "身份证号"
   
