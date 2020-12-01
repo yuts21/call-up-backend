@@ -18,5 +18,5 @@ const (
 	Unprocessed uint = iota + 1
 	Agreed
 	Denied
-	Canceled
+	Abolished
 )
