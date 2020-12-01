@@ -17,11 +17,10 @@ func (service *RequestShow) Show(c *gin.Context) serializer.Response {
 	var request model.Request
 	user, _ := c.Get("user")
 	requester := user.(*model.User)
-	err := model.DB.
-		Where("id = ? AND requester_id = ?", service.RequestID, requester.ID).
-		First(&request).Error
 
-	if err != nil {
+	if err := model.DB.
+		Where("id = ? AND requester_id = ?", service.RequestID, requester.ID).
+		First(&request).Error; err != nil {
 		return serializer.Err(serializer.CodeDBError, "接令请求查询失败", err)
 	}
 
