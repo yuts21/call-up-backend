@@ -58,6 +58,8 @@ func NewRouter() *gin.Engine {
 				userAuth.POST("req/create", api.RequestCreate)
 				userAuth.POST("req/list", api.RequestList)
 				userAuth.POST("req/info", api.RequestInfo)
+				userAuth.POST("req/update", api.RequestUpdate)
+				userAuth.DELETE("req/delete", api.RequestDelete)
 			}
 			//需要管理员用户权限的
 			adminAuth := auth.Group("")

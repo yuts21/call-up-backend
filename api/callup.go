@@ -2,8 +2,9 @@ package api
 
 import (
 	"call-up/service"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 // CallupCreate 创建召集令
