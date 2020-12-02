@@ -24,7 +24,7 @@ func BuildRequestShow(request model.Request) Request {
 	}
 }
 
-// BuildRequestShowResponse 序列化接令请求查询响应
+// BuildRequestInfoResponse 序列化接令请求查询响应
 func BuildRequestInfoResponse(request model.Request) Response {
 	return Response{
 		Code: CodeSuccess,
@@ -41,10 +41,13 @@ func BuildRequestList(items []model.Request) (requests []Request) {
 	return requests
 }
 
-// BuildRequestListResponse 序列化接令请求列表响应
-func BuildRequestListResponse(items []model.Request) Response {
+// BuildListResponse 序列列表响应
+func BuildListResponse(items interface{}, total uint) Response {
 	return Response{
 		Code: CodeSuccess,
-		Data: BuildRequestList(items),
+		Data: DataList{
+			Items: items,
+			Total: total,
+		},
 	}
 }
