@@ -9,8 +9,8 @@ import (
 
 // RequestList 接令请求列表服务
 type RequestList struct {
-	Offset int `form:"offset" json:"offset" binding:"required"`
-	Limit  int `form:"limit" json:"limit" binding:"required"`
+	Offset int `form:"offset" json:"offset"`
+	Limit  int `form:"limit" json:"limit"`
 }
 
 // List 接令请求列表
@@ -20,12 +20,16 @@ func (service *RequestList) List(c *gin.Context) serializer.Response {
 	requester := user.(*model.User)
 	total := 0
 
+	if service.Limit == 0 {
+		service.Limit = 10
+	}
+
 	if err := model.DB.Model(model.Request{}).Count(&total).Error; err != nil {
 		return serializer.Err(serializer.CodeDBError, "接令请求列表查询失败", err)
 	}
 
 	if err := model.DB.
-		Where("id = ?", requester.ID).
+		Where("requester_id = ?", requester.ID).
 		Limit(service.Limit).
 		Offset(service.Offset).
 		Find(&requests).Error; err != nil {

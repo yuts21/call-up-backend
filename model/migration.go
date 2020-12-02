@@ -32,6 +32,7 @@ func migration() {
 		}
 	}
 	DB.AutoMigrate(&Callup{})
+	DB.AutoMigrate(&Request{})
 	// 外键约束
 	//DB.Model(&Switch{}).AddForeignKey("room_id", "rooms(room_id)", "CASCADE", "CASCADE")
 }

@@ -29,5 +29,7 @@ func (service *RequestCreate) Create(c *gin.Context) serializer.Response {
 		return serializer.Err(serializer.CodeDBError, "接令请求创建失败", err)
 	}
 
-	return serializer.Success("接令请求创建成功")
+	resp := serializer.BuildRequestInfoResponse(request)
+	resp.Msg = "创建成功"
+	return resp
 }
