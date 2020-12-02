@@ -37,3 +37,25 @@ func CallupPicture(c *gin.Context) {
 		c.JSON(http.StatusOK, ErrorResponse(err))
 	}
 }
+
+// CallupUpdate 召集令修改
+func CallupUpdate(c *gin.Context) {
+	var serv service.CallupUpdate
+	if err := c.ShouldBind(&serv); err == nil {
+		res := serv.Update(c)
+		c.JSON(http.StatusOK, res)
+	} else {
+		c.JSON(http.StatusOK, ErrorResponse(err))
+	}
+}
+
+// CallupDelete 召集令删除
+func CallupDelete(c *gin.Context) {
+	var serv service.CallupDelete
+	if err := c.ShouldBind(&serv); err == nil {
+		res := serv.Delete(c)
+		c.JSON(http.StatusOK, res)
+	} else {
+		c.JSON(http.StatusOK, ErrorResponse(err))
+	}
+}
