@@ -25,7 +25,7 @@ func (service *RequestList) List(c *gin.Context) serializer.Response {
 	}
 
 	if err := model.DB.
-		Where("requester_id = ?", requester.ID).
+		Where("id = ?", requester.ID).
 		Limit(service.Limit).
 		Offset(service.Offset).
 		Find(&requests).Error; err != nil {

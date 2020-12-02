@@ -10,7 +10,7 @@ import (
 // RequestCreate 接令请求创建服务
 type RequestCreate struct {
 	CallupID    uint   `form:"callup_id" json:"callup_id" binding:"required"`
-	Description string `form:"desc" json:"desc"`
+	Description string `form:"description" json:"description"`
 }
 
 // Create 创建接令请求
