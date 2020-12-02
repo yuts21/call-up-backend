@@ -2,6 +2,7 @@ package api
 
 import (
 	"call-up/service"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -11,9 +12,9 @@ func UserRegister(c *gin.Context) {
 	var serv service.UserRegister
 	if err := c.ShouldBind(&serv); err == nil {
 		res := serv.Register()
-		c.JSON(200, res)
+		c.JSON(http.StatusOK, res)
 	} else {
-		c.JSON(200, ErrorResponse(err))
+		c.JSON(http.StatusOK, ErrorResponse(err))
 	}
 }
 
@@ -22,9 +23,9 @@ func UserInfo(c *gin.Context) {
 	var serv service.UserInfo
 	if err := c.ShouldBind(&serv); err == nil {
 		res := serv.Info(c)
-		c.JSON(200, res)
+		c.JSON(http.StatusOK, res)
 	} else {
-		c.JSON(200, ErrorResponse(err))
+		c.JSON(http.StatusOK, ErrorResponse(err))
 	}
 }
 
@@ -33,9 +34,9 @@ func UserPasswordUpdate(c *gin.Context) {
 	var serv service.UserPasswordUpdate
 	if err := c.ShouldBind(&serv); err == nil {
 		res := serv.Update(c)
-		c.JSON(200, res)
+		c.JSON(http.StatusOK, res)
 	} else {
-		c.JSON(200, ErrorResponse(err))
+		c.JSON(http.StatusOK, ErrorResponse(err))
 	}
 }
 
@@ -44,8 +45,8 @@ func UserInfoUpdate(c *gin.Context) {
 	var serv service.UserInfoUpdate
 	if err := c.ShouldBind(&serv); err == nil {
 		res := serv.Update(c)
-		c.JSON(200, res)
+		c.JSON(http.StatusOK, res)
 	} else {
-		c.JSON(200, ErrorResponse(err))
+		c.JSON(http.StatusOK, ErrorResponse(err))
 	}
 }

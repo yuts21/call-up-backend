@@ -17,9 +17,7 @@ func (service *RequestList) List(c *gin.Context) serializer.Response {
 	user, _ := c.Get("user")
 	requester := user.(*model.User)
 
-	if err := model.DB.
-		Where("requester_id = ?", requester.ID).
-		Find(&requests).Error; err != nil {
+	if err := model.DB.Where("requester_id = ?", requester.ID).Find(&requests).Error; err != nil {
 		return serializer.Err(serializer.CodeDBError, "接令请求列表查询失败", err)
 	}
 

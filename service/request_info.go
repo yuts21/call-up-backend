@@ -14,14 +14,15 @@ type RequestInfo struct {
 
 // Info 查询接令请求
 func (service *RequestInfo) Info(c *gin.Context) serializer.Response {
-	var request model.Request
-	user, _ := c.Get("user")
-	requester := user.(*model.User)
+	curUser, _ := c.Get("user")
+	user := curUser.(*model.User)
 
-	if err := model.DB.
-		Where("id = ? and requester_id = ?", service.RequestID, requester.ID).
-		First(&request).Error; err != nil {
+	var request model.Request
+	if err := model.DB.Where("id = ?", service.RequestID).First(&request).Error; err != nil {
 		return serializer.Err(serializer.CodeDBError, "接令请求查询失败", err)
+	}
+	if !user.Type && user.ID != request.RequesterID {
+		return serializer.Err(serializer.CodeNoRightErr, "无权限", nil)
 	}
 
 	resp := serializer.BuildRequestInfoResponse(request)
