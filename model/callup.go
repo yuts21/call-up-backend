@@ -9,8 +9,8 @@ import (
 // Callup 召集令模型
 type Callup struct {
 	gorm.Model
-	LordID      uint
 	Lord        User
+	LordID      uint
 	Type        uint8
 	Name        string
 	Description string `gorm:"type:text"`

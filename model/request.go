@@ -5,10 +5,10 @@ import "github.com/jinzhu/gorm"
 // Request 接令请求模型
 type Request struct {
 	gorm.Model
-	CallupID    uint
 	Callup      Callup
-	RequesterID uint
+	CallupID    uint
 	Requester   User
+	RequesterID uint
 	Description string `gorm:"type:text"`
 	Status      uint8
 }
