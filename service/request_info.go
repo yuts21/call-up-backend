@@ -18,11 +18,8 @@ func (service *RequestInfo) Info(c *gin.Context) serializer.Response {
 	user := curUser.(*model.User)
 
 	var request model.Request
-	if err := model.DB.Where("id = ?", service.RequestID).First(&request).Error; err != nil {
+	if err := model.DB.Where("id = ? and requester_id = ?", service.RequestID, user.ID).First(&request).Error; err != nil {
 		return serializer.Err(serializer.CodeDBError, "接令请求查询失败", err)
-	}
-	if !user.Type && user.ID != request.RequesterID {
-		return serializer.Err(serializer.CodeNoRightErr, "无权限", nil)
 	}
 
 	resp := serializer.BuildRequestInfoResponse(request)
