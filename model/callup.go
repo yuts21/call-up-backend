@@ -18,6 +18,7 @@ type Callup struct {
 	EndDate     time.Time `gorm:"type:date"`
 	PicturePath string
 	Status      uint8
+	Request     []Request
 }
 
 // 状态码
