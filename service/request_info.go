@@ -9,7 +9,7 @@ import (
 
 // RequestInfo 接令请求查询服务
 type RequestInfo struct {
-	RequestID uint `form:"request_id" json:"request_id" binding:"required"`
+	ID uint `form:"ID" json:"ID" binding:"required"`
 }
 
 // Info 查询接令请求
@@ -18,7 +18,7 @@ func (service *RequestInfo) Info(c *gin.Context) serializer.Response {
 	user := curUser.(*model.User)
 
 	var request model.Request
-	if err := model.DB.Where("id = ? and requester_id = ?", service.RequestID, user.ID).First(&request).Error; err != nil {
+	if err := model.DB.Where("id = ? and requester_id = ?", service.ID, user.ID).First(&request).Error; err != nil {
 		return serializer.Err(serializer.CodeDBError, "接令请求查询失败", err)
 	}
 

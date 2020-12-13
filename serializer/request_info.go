@@ -9,7 +9,7 @@ type Request struct {
 	RequestID   uint   `json:"request_id"`
 	CallupID    uint   `json:"callup_id"`
 	RequesterID uint   `json:"requester_id"`
-	Description string `json:"description"`
+	Description string `json:"descrpt"`
 	Status      uint8  `json:"status"`
 }
 
