@@ -19,7 +19,7 @@ func (service *CallupPicture) GetPicture(c *gin.Context) {
 	user := curUser.(*model.User)
 
 	var callup model.Callup
-	if err := model.DB.Where("id = ? and lord_id = ?", service.ID, user.ID).First(&callup).Error; err != nil {
+	if err := model.DB.Where("id = ? and sponsor_id = ?", service.ID, user.ID).First(&callup).Error; err != nil {
 		c.JSON(http.StatusOK, serializer.Err(serializer.CodeDBError, "召集令查询失败", err))
 	}
 

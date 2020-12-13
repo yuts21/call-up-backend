@@ -22,7 +22,12 @@ func (service *RequestInfo) Info(c *gin.Context) serializer.Response {
 		return serializer.Err(serializer.CodeDBError, "接令请求查询失败", err)
 	}
 
-	resp := serializer.BuildRequestInfoResponse(request)
+	var callup model.Callup
+	if err := model.DB.Model(&request).Related(&callup).Error; err != nil {
+		return serializer.Err(serializer.CodeDBError, "召集令查询失败", err)
+	}
+
+	resp := serializer.BuildRequestInfoResponse(request, callup.Name)
 	resp.Msg = "查询成功"
 	return resp
 }

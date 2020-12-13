@@ -15,7 +15,6 @@ type RequestList struct {
 
 // List 接令请求列表
 func (service *RequestList) List(c *gin.Context) serializer.Response {
-	requests := []model.Request{}
 	user, _ := c.Get("user")
 	requester := user.(*model.User)
 
@@ -28,15 +27,17 @@ func (service *RequestList) List(c *gin.Context) serializer.Response {
 		return serializer.Err(serializer.CodeDBError, "接令请求列表查询失败", err)
 	}
 
-	if err := model.DB.
+	var results []serializer.RequestListItem
+	if err := model.DB.Model(&model.Request{}).Select("requests.id as request_id, callups.name as callup_name, requests.status as status").
+		Joins("join callups on requests.callup_id = callups.id").
 		Where("requester_id = ?", requester.ID).
 		Limit(service.Limit).
 		Offset(service.Offset).
-		Find(&requests).Error; err != nil {
+		Scan(&results).Error; err != nil {
 		return serializer.Err(serializer.CodeDBError, "接令请求列表查询失败", err)
 	}
 
-	resp := serializer.BuildListResponse(serializer.BuildRequestList(requests), uint(total))
+	resp := serializer.BuildListResponse(results, uint(total))
 	resp.Msg = "查询成功"
 	return resp
 }

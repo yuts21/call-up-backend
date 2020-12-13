@@ -2,16 +2,16 @@ package model
 
 import (
 	"call-up/cache"
+	"github.com/jinzhu/gorm"
 	"strconv"
 	"time"
-	"github.com/jinzhu/gorm"
 )
 
 // Callup 召集令模型
 type Callup struct {
 	gorm.Model
-	Lord        User
-	LordID      uint
+	SponsorID   uint
+	Sponsor     User `gorm:"foreignKey:SponsorID"`
 	Type        uint8
 	Name        string
 	Description string `gorm:"type:text"`

@@ -4,50 +4,21 @@ import (
 	"call-up/model"
 )
 
-// Request 接令请求序列化器
-type Request struct {
-	RequestID   uint   `json:"request_id"`
-	CallupID    uint   `json:"callup_id"`
-	RequesterID uint   `json:"requester_id"`
-	Description string `json:"descrpt"`
-	Status      uint8  `json:"status"`
-}
-
-// BuildRequestInfo 序列化接令请求查询
-func BuildRequestInfo(request model.Request) Request {
-	return Request{
-		RequestID:   request.ID,
-		CallupID:    request.CallupID,
-		RequesterID: request.RequesterID,
-		Description: request.Description,
-		Status:      request.Status,
-	}
+// RequestInfo 接令请求信息序列化器
+type RequestInfo struct {
+	CallupName    string `json:"callup_name"`
+	Description   string `json:"descrpt"`
+	Status        uint8  `json:"status"`
 }
 
 // BuildRequestInfoResponse 序列化接令请求查询响应
-func BuildRequestInfoResponse(request model.Request) Response {
+func BuildRequestInfoResponse(request model.Request, callupName string) Response {
 	return Response{
 		Code: CodeSuccess,
-		Data: BuildRequestInfo(request),
-	}
-}
-
-// BuildRequestList 序列化接令请求列表
-func BuildRequestList(items []model.Request) (requests []Request) {
-	for _, item := range items {
-		request := BuildRequestInfo(item)
-		requests = append(requests, request)
-	}
-	return requests
-}
-
-// BuildListResponse 序列列表响应
-func BuildListResponse(items interface{}, total uint) Response {
-	return Response{
-		Code: CodeSuccess,
-		Data: DataList{
-			Items: items,
-			Total: total,
+		Data: RequestInfo{
+			CallupName:    callupName,
+			Description:   request.Description,
+			Status:        request.Status,
 		},
 	}
 }

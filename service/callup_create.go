@@ -25,10 +25,10 @@ type CallupCreate struct {
 // Create 创建召集令
 func (service *CallupCreate) Create(c *gin.Context) serializer.Response {
 	curUser, _ := c.Get("user")
-	Lord := curUser.(*model.User)
+	Sponsor := curUser.(*model.User)
 
 	callup := model.Callup{
-		LordID:      Lord.ID,
+		SponsorID:   Sponsor.ID,
 		Type:        service.Type,
 		Name:        service.Name,
 		Description: service.Description,

@@ -19,7 +19,7 @@ type User struct {
 	Introduction   string `gorm:"type:text"`
 	Province       string
 	City           string
-	Request        []Request `gorm:"ForeignKey:RequesterID"`
+	Request        []Request `gorm:"foreignKey:RequesterID"`
 }
 
 // PassWordCost 密码加密难度

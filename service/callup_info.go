@@ -18,7 +18,7 @@ func (service *CallupInfo) Info(c *gin.Context) serializer.Response {
 	user := curUser.(*model.User)
 
 	var callup model.Callup
-	if err := model.DB.Where("id = ? and lord_id = ?", service.ID, user.ID).First(&callup).Error; err != nil {
+	if err := model.DB.Where("id = ? and sponsor_id = ?", service.ID, user.ID).First(&callup).Error; err != nil {
 		return serializer.Err(serializer.CodeDBError, "召集令查询失败", err)
 	}
 

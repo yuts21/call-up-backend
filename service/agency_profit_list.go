@@ -19,7 +19,7 @@ type AgencyProfitList struct {
 
 // List 中介收益信息函数
 func (service *AgencyProfitList) List(c *gin.Context) serializer.Response {
-	agencyProfits := []model.AgencyProfit{}
+	var agencyProfits []model.AgencyProfit
 	if err := model.DB.
 		Where("success_date >= ? and success_date <= ?", service.StartDate, service.EndDate).
 		Find(&agencyProfits).Error; err != nil {

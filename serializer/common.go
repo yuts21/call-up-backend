@@ -64,3 +64,14 @@ func Success(msg string) Response {
 	}
 	return res
 }
+
+// BuildListResponse 序列列表响应
+func BuildListResponse(items interface{}, total uint) Response {
+	return Response{
+		Code: CodeSuccess,
+		Data: DataList{
+			Items: items,
+			Total: total,
+		},
+	}
+}
