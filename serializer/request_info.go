@@ -13,8 +13,8 @@ type Request struct {
 	Status      uint8  `json:"status"`
 }
 
-// BuildRequestShow 序列化接令请求查询
-func BuildRequestShow(request model.Request) Request {
+// BuildRequestInfo 序列化接令请求查询
+func BuildRequestInfo(request model.Request) Request {
 	return Request{
 		RequestID:   request.ID,
 		CallupID:    request.CallupID,
@@ -28,14 +28,14 @@ func BuildRequestShow(request model.Request) Request {
 func BuildRequestInfoResponse(request model.Request) Response {
 	return Response{
 		Code: CodeSuccess,
-		Data: BuildRequestShow(request),
+		Data: BuildRequestInfo(request),
 	}
 }
 
 // BuildRequestList 序列化接令请求列表
 func BuildRequestList(items []model.Request) (requests []Request) {
 	for _, item := range items {
-		request := BuildRequestShow(item)
+		request := BuildRequestInfo(item)
 		requests = append(requests, request)
 	}
 	return requests

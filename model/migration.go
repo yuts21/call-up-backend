@@ -15,13 +15,14 @@ func migration() {
 	DB.Model(&User{}).Where("user_id = ?", adminID).Count(&count)
 	if count == 0 {
 		var admin = User{
-			UserID:  adminID,
-			Type:    true,
-			Name:    "Administrator",
-			IDType:  0,
-			Phone:   "00000000000",
-			Level:   2,
-			RegCity: "北京市海淀区",
+			UserID:   adminID,
+			Type:     true,
+			Name:     "Administrator",
+			IDType:   0,
+			Phone:    "00000000000",
+			Level:    2,
+			Province: "北京市",
+			City:     "海淀区",
 		}
 		if err := admin.SetPassword(adminPassword); err != nil {
 			log.Fatal("管理员密码加密失败", err.Error())

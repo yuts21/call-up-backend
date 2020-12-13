@@ -3,8 +3,9 @@ package service
 import (
 	"call-up/model"
 	"call-up/serializer"
-	"github.com/gin-gonic/gin"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 // CallupUpdate 修改召集令服务

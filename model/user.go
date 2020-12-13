@@ -17,7 +17,8 @@ type User struct {
 	Phone          string `gorm:"size:11"`
 	Level          uint8
 	Introduction   string `gorm:"type:text"`
-	RegCity        string
+	Province       string
+	City           string
 }
 
 // PassWordCost 密码加密难度

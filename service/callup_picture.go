@@ -3,8 +3,9 @@ package service
 import (
 	"call-up/model"
 	"call-up/serializer"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 // CallupPicture 召集令图片服务

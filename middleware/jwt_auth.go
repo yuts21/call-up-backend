@@ -4,17 +4,19 @@ import (
 	"call-up/model"
 	"call-up/serializer"
 	"call-up/service"
-	"github.com/appleboy/gin-jwt/v2"
-	"github.com/gin-gonic/gin"
 	"os"
 	"strconv"
 	"time"
+
+	jwt "github.com/appleboy/gin-jwt/v2"
+	"github.com/gin-gonic/gin"
 )
 
 const identityKey = "UID"
 
 var jwtSecret = os.Getenv("JWT_SECRET")
 
+// GinJWTMiddlewareInit 初始化JWT
 func GinJWTMiddlewareInit() (authMiddleware *jwt.GinJWTMiddleware, err error) {
 	return jwt.New(&jwt.GinJWTMiddleware{
 		Realm:       "call-up jwt",

@@ -12,7 +12,8 @@ type UserInfo struct {
 	Phone        string `json:"phone"`
 	Level        uint8  `json:"level"`
 	Introduction string `json:"intro"`
-	RegCity      string `json:"city"`
+	Province     string `json:"province"`
+	City         string `json:"city"`
 	CreatedAt    int64  `json:"created_at"`
 	UpdatedAt    int64  `json:"updated_at"`
 }
@@ -30,7 +31,8 @@ func BuildUserInfoResponse(user model.User) Response {
 			Phone:        user.Phone,
 			Level:        user.Level,
 			Introduction: user.Introduction,
-			RegCity:      user.RegCity,
+			Province:     user.Province,
+			City:         user.City,
 			CreatedAt:    user.CreatedAt.Unix(),
 			UpdatedAt:    user.UpdatedAt.Unix(),
 		},

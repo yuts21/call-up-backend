@@ -1,10 +1,12 @@
 package model
 
 import (
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"log"
 	"time"
+
+	"github.com/jinzhu/gorm"
+	// mysql driver
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 // DB 数据库链接单例

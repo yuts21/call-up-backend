@@ -3,13 +3,15 @@ package conf
 import (
 	"call-up/cache"
 	"call-up/model"
-	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 	"log"
 	"os"
 	"path"
+
+	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
+// FilePath 存储图片路径
 var FilePath string
 
 // Init 初始化配置项
@@ -27,6 +29,7 @@ func Init() {
 		log.Fatal("翻译文件加载失败", err.Error())
 	}
 
+	// 存储图片
 	FilePath = path.Join(os.Getenv("HOME"), os.Getenv("FILE_PATH"))
 	if err := os.MkdirAll(FilePath, os.ModePerm); err != nil {
 		log.Fatal("文件目录创建失败", err.Error())

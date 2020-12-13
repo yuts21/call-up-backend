@@ -14,7 +14,8 @@ type UserRegister struct {
 	IDNumber     string `form:"id_number" json:"id_number" binding:"required"`
 	Phone        string `form:"phone" json:"phone" binding:"required,len=11"`
 	Introduction string `form:"intro" json:"intro"`
-	RegCity      string `form:"city" json:"city"`
+	Province     string `form:"province" json:"province"`
+	City         string `form:"city" json:"city"`
 }
 
 // Register 用户注册
@@ -32,7 +33,8 @@ func (service *UserRegister) Register() serializer.Response {
 		IDNumber:     service.IDNumber,
 		Phone:        service.Phone,
 		Introduction: service.Introduction,
-		RegCity:      service.RegCity,
+		Province:     service.Province,
+		City:         service.City,
 	}
 
 	// 加密密码
