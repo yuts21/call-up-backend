@@ -24,7 +24,7 @@ func BuildCallupInfoResponse(callup model.Callup) Response {
 			Description: callup.Description,
 			Capacity:    callup.Capacity,
 			EndDate:     callup.EndDate.Unix(),
-			Status:      callup.Status,
+			Status:      callup.Status(),
 		},
 	}
 }
