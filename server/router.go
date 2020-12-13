@@ -3,8 +3,9 @@ package server
 import (
 	"call-up/api"
 	"call-up/middleware"
-	"github.com/gin-gonic/gin"
 	"log"
+
+	"github.com/gin-gonic/gin"
 )
 
 // NewRouter 路由配置
@@ -65,6 +66,7 @@ func NewRouter() *gin.Engine {
 			adminAuth := auth.Group("")
 			{
 				adminAuth.Use(middleware.AdminAuth())
+				adminAuth.POST("agency/list", api.AgencyProfitList)
 			}
 		}
 
