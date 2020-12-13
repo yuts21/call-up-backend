@@ -18,13 +18,13 @@ func (service *RequestList) List(c *gin.Context) serializer.Response {
 	requests := []model.Request{}
 	user, _ := c.Get("user")
 	requester := user.(*model.User)
-	total := 0
 
 	if service.Limit == 0 {
 		service.Limit = 10
 	}
 
-	if err := model.DB.Model(model.Request{}).Count(&total).Error; err != nil {
+	total := 0
+	if err := model.DB.Model(&model.Request{}).Where("requester_id = ?", requester.ID).Count(&total).Error; err != nil {
 		return serializer.Err(serializer.CodeDBError, "接令请求列表查询失败", err)
 	}
 
