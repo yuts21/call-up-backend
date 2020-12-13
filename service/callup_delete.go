@@ -21,11 +21,8 @@ func (service *CallupDelete) Delete(c *gin.Context) serializer.Response {
 		return serializer.Err(serializer.CodeDBError, "召集令查询失败", err)
 	}
 
-	count := 0
-	var requests []model.Request
-	model.DB.Model(&callup).Related(&requests).Count(&count)
-	if count > 0 {
-		return serializer.Err(serializer.CodeParamErr, "该召集令已有响应者", nil)
+	if !callup.Canceled {
+		return serializer.Err(serializer.CodeParamErr, "该召集令未被取消", nil)
 	}
 
 	if err := model.DB.Delete(&callup).Error; err != nil {

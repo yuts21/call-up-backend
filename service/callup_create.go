@@ -34,7 +34,6 @@ func (service *CallupCreate) Create(c *gin.Context) serializer.Response {
 		Description: service.Description,
 		Capacity:    service.Capacity,
 		EndDate:     time.Unix(service.EndDate, 0),
-		Status:      model.Waiting,
 	}
 
 	if err := model.DB.Create(&callup).Error; err != nil {

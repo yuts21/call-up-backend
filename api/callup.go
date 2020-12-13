@@ -50,6 +50,17 @@ func CallupUpdate(c *gin.Context) {
 	}
 }
 
+// CallupCancel 召集令取消
+func CallupCancel(c *gin.Context) {
+	var serv service.CallupCancel
+	if err := c.ShouldBind(&serv); err == nil {
+		res := serv.Cancel(c)
+		c.JSON(http.StatusOK, res)
+	} else {
+		c.JSON(http.StatusOK, ErrorResponse(err))
+	}
+}
+
 // CallupDelete 召集令删除
 func CallupDelete(c *gin.Context) {
 	var serv service.CallupDelete

@@ -3,9 +3,8 @@ package server
 import (
 	"call-up/api"
 	"call-up/middleware"
-	"log"
-
 	"github.com/gin-gonic/gin"
+	"log"
 )
 
 // NewRouter 路由配置
@@ -54,6 +53,7 @@ func NewRouter() *gin.Engine {
 				userAuth.POST("callup/info", api.CallupInfo)
 				userAuth.POST("callup/pic", api.CallupPicture)
 				userAuth.POST("callup/update", api.CallupUpdate)
+				userAuth.POST("callup/cancel", api.CallupCancel)
 				userAuth.DELETE("callup/delete", api.CallupDelete)
 				userAuth.POST("req/create", api.RequestCreate)
 				userAuth.POST("req/list", api.RequestList)
