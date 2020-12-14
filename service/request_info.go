@@ -27,7 +27,7 @@ func (service *RequestInfo) Info(c *gin.Context) serializer.Response {
 		return serializer.Err(serializer.CodeDBError, "召集令查询失败", err)
 	}
 
-	resp := serializer.BuildRequestInfoResponse(request, callup.Name)
+	resp := serializer.BuildRequestInfoResponse(request, callup)
 	resp.Msg = "查询成功"
 	return resp
 }
