@@ -71,3 +71,14 @@ func CallupDelete(c *gin.Context) {
 		c.JSON(http.StatusOK, ErrorResponse(err))
 	}
 }
+
+// CallupRequestList 召集令请求列表
+func CallupRequestList(c *gin.Context) {
+	var serv service.CallupRequestList
+	if err := c.ShouldBind(&serv); err == nil {
+		res := serv.List(c)
+		c.JSON(http.StatusOK, res)
+	} else {
+		c.JSON(http.StatusOK, ErrorResponse(err))
+	}
+}

@@ -37,7 +37,7 @@ func (callup *Callup) Status() uint8 {
 	}
 
 	var count uint = 0
-	strCallupID := strconv.FormatUint(uint64(callup.ID), 10)
+	strCallupID := "callup_" + strconv.FormatUint(uint64(callup.ID), 10)
 	if cache.RedisClient.Exists(strCallupID).Val() == 0 {
 		DB.Model(&Request{}).Where("callup_id = ? and status = ?", callup.ID, Agreed).Count(&count)
 		cache.RedisClient.Set(strCallupID, strconv.FormatInt(int64(count), 10), 0)
