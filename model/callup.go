@@ -2,9 +2,10 @@ package model
 
 import (
 	"call-up/cache"
-	"github.com/jinzhu/gorm"
 	"strconv"
 	"time"
+
+	"gorm.io/gorm"
 )
 
 // Callup 召集令模型
@@ -36,16 +37,15 @@ func (callup *Callup) Status() uint8 {
 		return Canceled
 	}
 
-	var count uint = 0
+	var count int64 = 0
 	strCallupID := "callup_" + strconv.FormatUint(uint64(callup.ID), 10)
 	if cache.RedisClient.Exists(strCallupID).Val() == 0 {
 		DB.Model(&Request{}).Where("callup_id = ? and status = ?", callup.ID, Agreed).Count(&count)
-		cache.RedisClient.Set(strCallupID, strconv.FormatInt(int64(count), 10), 0)
+		cache.RedisClient.Set(strCallupID, strconv.FormatInt(count, 10), 0)
 	} else {
-		count64, _ := strconv.ParseInt(cache.RedisClient.Get(strCallupID).Val(), 10, 64)
-		count = uint(count64)
+		count, _ = strconv.ParseInt(cache.RedisClient.Get(strCallupID).Val(), 10, 64)
 	}
-	if count >= callup.Capacity {
+	if uint(count) >= callup.Capacity {
 		return Completed
 	}
 

@@ -28,10 +28,7 @@ func (service *CallupRequestList) List(c *gin.Context) serializer.Response {
 		service.Limit = 10
 	}
 
-	total := 0
-	if err := model.DB.Where("callup_id = ?", callup.ID).Error; err != nil {
-		return serializer.Err(serializer.CodeDBError, "接令请求列表查询失败", err)
-	}
+	total := model.DB.Model(&callup).Association("Request").Count()
 
 	var results []serializer.CallupRequestListItem
 	if err := model.DB.Model(&model.Request{}).Select("requests.id as request_id, requests.requester_id as requester_id, users.name as requester_name, requests.status as status").
@@ -43,7 +40,7 @@ func (service *CallupRequestList) List(c *gin.Context) serializer.Response {
 		return serializer.Err(serializer.CodeDBError, "接令请求列表查询失败", err)
 	}
 
-	resp := serializer.BuildListResponse(results, uint(total))
+	resp := serializer.BuildListResponse(results, total)
 	resp.Msg = "查询成功"
 	return resp
 }

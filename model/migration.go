@@ -10,8 +10,10 @@ const (
 //执行数据迁移
 func migration() {
 	// 自动迁移模式
-	DB.AutoMigrate(&User{})
-	count := 0
+	if err := DB.AutoMigrate(&User{}); err != nil {
+		log.Fatal("数据模型同步失败", err.Error())
+	}
+	var count int64 = 0
 	DB.Model(&User{}).Where("user_id = ?", adminID).Count(&count)
 	if count == 0 {
 		var admin = User{
@@ -32,8 +34,16 @@ func migration() {
 			log.Fatal("管理员添加失败", err.Error())
 		}
 	}
-	DB.AutoMigrate(&Callup{})
-	DB.AutoMigrate(&Request{})
-	// 外键约束
-	//DB.Model(&Switch{}).AddForeignKey("room_id", "rooms(room_id)", "CASCADE", "CASCADE")
+	if err := DB.AutoMigrate(&Callup{}); err != nil {
+		log.Fatal("数据模型同步失败", err.Error())
+	}
+	if err := DB.AutoMigrate(&Request{}); err != nil {
+		log.Fatal("数据模型同步失败", err.Error())
+	}
+	if err := DB.AutoMigrate(&SuccessCallupDetail{}); err != nil {
+		log.Fatal("数据模型同步失败", err.Error())
+	}
+	if err := DB.AutoMigrate(&AgencyProfit{}); err != nil {
+		log.Fatal("数据模型同步失败", err.Error())
+	}
 }

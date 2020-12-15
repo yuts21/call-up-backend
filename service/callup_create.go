@@ -18,7 +18,7 @@ type CallupCreate struct {
 	Type        uint8  `form:"type" json:"type" binding:"required"`
 	Name        string `form:"name" json:"name" binding:"required"`
 	Description string `form:"descrpt" json:"descrpt"`
-	Capacity    uint   `form:"cap" json:"cap" binding:"required,gt=0"`
+	Capacity    uint   `form:"cap" json:"cap" binding:"required"`
 	EndDate     int64  `form:"end_date" json:"end_date" binding:"required"`
 }
 

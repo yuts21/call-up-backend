@@ -23,7 +23,7 @@ func (service *RequestInfo) Info(c *gin.Context) serializer.Response {
 	}
 
 	var callup model.Callup
-	if err := model.DB.Model(&request).Related(&callup).Error; err != nil {
+	if err := model.DB.Model(&request).Association("Callup").Find(&callup); err != nil {
 		return serializer.Err(serializer.CodeDBError, "召集令查询失败", err)
 	}
 

@@ -13,7 +13,7 @@ type Response struct {
 // DataList 基础列表结构
 type DataList struct {
 	Items interface{} `json:"items"`
-	Total uint        `json:"total"`
+	Total int64       `json:"total"`
 }
 
 // TrackedErrorResponse 有追踪信息的错误响应
@@ -66,7 +66,7 @@ func Success(msg string) Response {
 }
 
 // BuildListResponse 序列列表响应
-func BuildListResponse(items interface{}, total uint) Response {
+func BuildListResponse(items interface{}, total int64) Response {
 	return Response{
 		Code: CodeSuccess,
 		Data: DataList{

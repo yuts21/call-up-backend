@@ -28,11 +28,7 @@ func (service *CallupUpdate) Update(c *gin.Context) serializer.Response {
 		return serializer.Err(serializer.CodeDBError, "召集令查询失败", err)
 	}
 
-	count := 0
-	if err := model.DB.Model(&model.Request{}).Where("callup_id = ?", callup.ID).Count(&count).Error; err != nil {
-		return serializer.Err(serializer.CodeDBError, "召集令接令请求查询失败", err)
-	}
-
+	count := model.DB.Model(&callup).Association("Request").Count()
 	if count > 0 {
 		return serializer.Err(serializer.CodeParamErr, "该召集令已有响应者", nil)
 	}

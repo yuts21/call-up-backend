@@ -72,6 +72,17 @@ func CallupDelete(c *gin.Context) {
 	}
 }
 
+// CallupRequestInfo 召集令信息列表
+func CallupRequestInfo(c *gin.Context) {
+	var serv service.CallupRequestInfo
+	if err := c.ShouldBind(&serv); err == nil {
+		res := serv.Info(c)
+		c.JSON(http.StatusOK, res)
+	} else {
+		c.JSON(http.StatusOK, ErrorResponse(err))
+	}
+}
+
 // CallupRequestList 召集令请求列表
 func CallupRequestList(c *gin.Context) {
 	var serv service.CallupRequestList

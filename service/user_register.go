@@ -20,8 +20,10 @@ type UserRegister struct {
 
 // Register 用户注册
 func (service *UserRegister) Register() serializer.Response {
-	count := 0
-	model.DB.Model(&model.User{}).Where("user_id = ?", service.UserID).Count(&count)
+	var count int64 = 0
+	if err := model.DB.Model(&model.User{}).Where("user_id = ?", service.UserID).Count(&count).Error; err != nil {
+		return serializer.Err(serializer.CodeDBError, "查询用户名失败", err)
+	}
 	if count > 0 {
 		return serializer.Err(serializer.CodeParamErr, "该用户名已经注册", nil)
 	}
