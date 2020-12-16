@@ -58,6 +58,7 @@ func NewRouter() *gin.Engine {
 				userAuth.DELETE("callup/delete", api.CallupDelete)
 				userAuth.POST("callup/req/info", api.CallupRequestInfo)
 				userAuth.POST("callup/req/list", api.CallupRequestList)
+				userAuth.POST("callup/req/handle", api.CallupRequestHandle)
 				userAuth.POST("req/create", api.RequestCreate)
 				userAuth.POST("req/list", api.RequestList)
 				userAuth.POST("req/info", api.RequestInfo)

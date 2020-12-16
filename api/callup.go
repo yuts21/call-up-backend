@@ -93,3 +93,14 @@ func CallupRequestList(c *gin.Context) {
 		c.JSON(http.StatusOK, ErrorResponse(err))
 	}
 }
+
+// CallupRequestHandle 召集令请求处理
+func CallupRequestHandle(c *gin.Context) {
+	var serv service.CallupRequestHandle
+	if err := c.ShouldBind(&serv); err == nil {
+		res := serv.Handle(c)
+		c.JSON(http.StatusOK, res)
+	} else {
+		c.JSON(http.StatusOK, ErrorResponse(err))
+	}
+}

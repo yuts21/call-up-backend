@@ -37,6 +37,8 @@ const (
 	CodeDBError = 50001
 	// CodeEncryptError 加密失败
 	CodeEncryptError = 50002
+	// CodeCacheError 缓存操作失败
+	CodeCacheError = 50003
 	//CodeParamErr 各种奇奇怪怪的参数错误
 	CodeParamErr = 40001
 	// CodeFileUploadError 文件上传错误
