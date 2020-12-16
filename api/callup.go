@@ -18,9 +18,20 @@ func CallupCreate(c *gin.Context) {
 	}
 }
 
-// CallupMine 召集令列表查询
+// CallupMine 自己发布的召集令列表查询
 func CallupMine(c *gin.Context) {
 	var serv service.CallupMine
+	if err := c.ShouldBind(&serv); err == nil {
+		res := serv.List(c)
+		c.JSON(http.StatusOK, res)
+	} else {
+		c.JSON(http.StatusOK, ErrorResponse(err))
+	}
+}
+
+// CallupList 召集令列表查询
+func CallupList(c *gin.Context) {
+	var serv service.CallupList
 	if err := c.ShouldBind(&serv); err == nil {
 		res := serv.List(c)
 		c.JSON(http.StatusOK, res)

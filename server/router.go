@@ -48,6 +48,7 @@ func NewRouter() *gin.Engine {
 
 			auth.POST("callup/info", api.CallupInfo)
 			auth.POST("callup/pic", api.CallupPicture)
+			auth.POST("callup/list", api.CallupList)
 
 			// 需要普通用户权限的
 			userAuth := auth.Group("")
@@ -66,6 +67,7 @@ func NewRouter() *gin.Engine {
 				userAuth.POST("req/info", api.RequestInfo)
 				userAuth.POST("req/update", api.RequestUpdate)
 				userAuth.POST("req/cancel", api.RequestCancel)
+				userAuth.POST("req/callup", api.RequestCallup)
 				userAuth.DELETE("req/delete", api.RequestDelete)
 			}
 			//需要管理员用户权限的
