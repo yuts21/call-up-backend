@@ -72,3 +72,14 @@ func RequestDelete(c *gin.Context) {
 		c.JSON(http.StatusOK, ErrorResponse(err))
 	}
 }
+
+// RequestCallup 已接令召集令查询
+func RequestCallup(c *gin.Context) {
+	var serv service.RequestCallup
+	if err := c.ShouldBind(&serv); err == nil {
+		res := serv.List(c)
+		c.JSON(http.StatusOK, res)
+	} else {
+		c.JSON(http.StatusOK, ErrorResponse(err))
+	}
+}

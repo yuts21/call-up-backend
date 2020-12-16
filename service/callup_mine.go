@@ -26,7 +26,7 @@ func (service *CallupMine) List(c *gin.Context) serializer.Response {
 
 	var callups []model.Callup
 	if err := model.DB.Where("sponsor_id = ?", user.ID).Limit(service.Limit).Offset(service.Offset).Find(&callups).Error; err != nil {
-		return serializer.Err(serializer.CodeDBError, "接令请求列表查询失败", err)
+		return serializer.Err(serializer.CodeDBError, "召集令列表查询失败", err)
 	}
 
 	resp := serializer.BuildCallupListResponse(callups, total)

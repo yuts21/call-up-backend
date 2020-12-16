@@ -10,6 +10,8 @@ type CallupInfo struct {
 	Name        string `json:"name"`
 	Description string `json:"descrpt"`
 	Capacity    uint   `json:"cap"`
+	SponsorID   uint   `json:"sponsor_id"`
+	SponsorName string `json:"sponsor_name"`
 	Province    string `json:"province"`
 	City        string `json:"city"`
 	EndDate     int64  `json:"end_date"`
@@ -25,6 +27,8 @@ func BuildCallupInfoResponse(callup model.Callup, sponsor model.User) Response {
 			Name:        callup.Name,
 			Description: callup.Description,
 			Capacity:    callup.Capacity,
+			SponsorID:   callup.SponsorID,
+			SponsorName: sponsor.Name,
 			Province:    sponsor.Province,
 			City:        sponsor.City,
 			EndDate:     callup.EndDate.Unix(),
