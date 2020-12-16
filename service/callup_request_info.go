@@ -32,7 +32,7 @@ func (service *CallupRequestInfo) Info(c *gin.Context) serializer.Response {
 	}
 
 	var requester model.User
-		if err := model.DB.Model(&request).Association("Requester").Find(&requester); err != nil {
+	if err := model.DB.Model(&request).Association("Requester").Find(&requester); err != nil {
 		return serializer.Err(serializer.CodeDBError, "请求者查询失败", nil)
 	}
 

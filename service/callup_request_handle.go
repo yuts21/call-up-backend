@@ -5,11 +5,11 @@ import (
 	"call-up/model"
 	"call-up/serializer"
 	"errors"
-	"gorm.io/gorm"
 	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 // CallupRequestHandle 召集令请求处理服务
@@ -84,7 +84,7 @@ func (service *CallupRequestHandle) Handle(c *gin.Context) serializer.Response {
 		date := time.Now()
 		date = time.Date(date.Year(), date.Month(), date.Day(), 0, 0, 0, 0, time.Local)
 		successCallupDetail := model.SuccessCallupDetail{
-			CallupID:          callup.ID,
+			CallupID: callup.ID,
 			Date:              date,
 			SponsorProfit:     3 * uint(count),
 			ParticipantProfit: 1 * uint(count),

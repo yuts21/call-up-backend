@@ -9,7 +9,7 @@ import (
 
 // RequestUpdate 接令请求修改服务
 type RequestUpdate struct {
-	ID   uint   `form:"id" json:"id" binding:"required"`
+	ID          uint   `form:"id" json:"id" binding:"required"`
 	Description string `form:"descrpt" json:"descrpt"`
 }
 
