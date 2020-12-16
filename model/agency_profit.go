@@ -2,13 +2,11 @@ package model
 
 import (
 	"time"
-
-	"gorm.io/gorm"
 )
 
 // AgencyProfit 中介收益汇总模型
 type AgencyProfit struct {
-	gorm.Model
+	ID           uint      `gorm:"primaryKey"`
 	SuccessDate  time.Time `gorm:"type:date"`
 	Province     string
 	City         string
