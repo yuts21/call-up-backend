@@ -40,7 +40,7 @@ func (service *RequestCallup) List(c *gin.Context) serializer.Response {
 	}
 
 	var callups []model.Callup
-	if err := db.Limit(service.Limit).Offset(service.Offset).Scan(&callups).Error; err != nil {
+	if err := db.Select("callups.*").Limit(service.Limit).Offset(service.Offset).Scan(&callups).Error; err != nil {
 			return serializer.Err(serializer.CodeDBError, "召集令列表查询失败", err)
 	}
 

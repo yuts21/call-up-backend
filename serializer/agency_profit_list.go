@@ -4,43 +4,37 @@ import (
 	"call-up/model"
 )
 
-// AgencyProfit 中介收益列表序列化器
-type AgencyProfit struct {
-	SuccessDate  int64 `json:"date"`
-	CompletedNum uint  `json:"completed_num"`
-	Profit       uint  `json:"profit"`
-}
-
-// BuildAgencyProfitInfo 序列化中介收益查询
-func BuildAgencyProfitInfo(agencyProfit model.AgencyProfit) AgencyProfit {
-	return AgencyProfit{
-		SuccessDate:  (agencyProfit.SuccessDate).Unix(),
-		CompletedNum: agencyProfit.CompletedNum,
-		Profit:       agencyProfit.Profit,
-	}
-}
-
-// BuildAgencyProfitInfoResponse 序列化中介收益查询响应
-func BuildAgencyProfitInfoResponse(angencyProfit model.AgencyProfit) Response {
-	return Response{
-		Code: CodeSuccess,
-		Data: BuildAgencyProfitInfo(angencyProfit),
-	}
+// AgencyProfitListItem 中介收益列表元素序列化器
+type AgencyProfitListItem struct {
+	Date         int64  `json:"date"`
+	Province     string `json:"province"`
+	City         string `json:"city"`
+	Type         uint8  `json:"type"`
+	CompletedNum uint   `json:"completed_num"`
+	Profit       uint   `json:"profit"`
 }
 
 // BuildAgencyProfitList 序列化中介收益列表
-func BuildAgencyProfitList(items []model.AgencyProfit) (angencyProfits []AgencyProfit) {
+func BuildAgencyProfitList(items []model.AgencyProfit) []AgencyProfitListItem {
+	var agencyProfits []AgencyProfitListItem
 	for _, item := range items {
-		angencyProfit := BuildAgencyProfitInfo(item)
-		angencyProfits = append(angencyProfits, angencyProfit)
+		agencyProfit := AgencyProfitListItem{
+			Date:         item.SuccessDate.Unix(),
+			Province:     item.Province,
+			City:         item.City,
+			Type:         item.Type,
+			CompletedNum: item.CompletedNum,
+			Profit:       item.Profit,
+		}
+		agencyProfits = append(agencyProfits, agencyProfit)
 	}
-	return angencyProfits
+	return agencyProfits
 }
 
 // BuildAgencyProfitListResponse 序列化中介收益列表响应
-func BuildAgencyProfitListResponse(angencyProfits []model.AgencyProfit) Response {
+func BuildAgencyProfitListResponse(agencyProfits []model.AgencyProfit) Response {
 	return Response{
 		Code: CodeSuccess,
-		Data: BuildAgencyProfitList(angencyProfits),
+		Data: BuildAgencyProfitList(agencyProfits),
 	}
 }

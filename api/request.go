@@ -40,6 +40,17 @@ func RequestList(c *gin.Context) {
 	}
 }
 
+// RequestAll 全部请求信息列表
+func RequestAll(c *gin.Context) {
+	var serv service.RequestAll
+	if err := c.ShouldBind(&serv); err == nil {
+		res := serv.List(c)
+		c.JSON(http.StatusOK, res)
+	} else {
+		c.JSON(http.StatusOK, ErrorResponse(err))
+	}
+}
+
 // RequestUpdate 请求信息修改
 func RequestUpdate(c *gin.Context) {
 	var serv service.RequestUpdate

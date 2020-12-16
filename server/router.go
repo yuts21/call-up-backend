@@ -75,7 +75,9 @@ func NewRouter() *gin.Engine {
 			{
 				adminAuth.Use(middleware.AdminAuth())
 				adminAuth.POST("user/list", api.UserList)
-				adminAuth.POST("agency/list", api.AgencyProfitList)
+				adminAuth.POST("req/all", api.RequestAll)
+				adminAuth.POST("profit/agency", api.AgencyProfitList)
+				adminAuth.POST("profit/callup", api.CallupProfitList)
 			}
 		}
 

@@ -31,7 +31,7 @@ func (service *CallupList) List(c *gin.Context) serializer.Response {
 
 	var total int64 = 0
 	if err := db.Count(&total).Error; err != nil {
-		return serializer.Err(serializer.CodeDBError, "接令请求列表查询失败", err)
+		return serializer.Err(serializer.CodeDBError, "召集令列表查询失败", err)
 	}
 
 	var callups []model.Callup
