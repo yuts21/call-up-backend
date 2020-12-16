@@ -9,8 +9,10 @@ import (
 
 // CallupMine 自己发布的召集令列表服务
 type CallupMine struct {
-	Offset int `form:"offset" json:"offset"`
-	Limit  int `form:"limit" json:"limit"`
+	Type   *uint8  `form:"type" json:"type" binding:"omitempty,gt=0"`
+	Name   *string `form:"name" json:"name"`
+	Offset int     `form:"offset" json:"offset"`
+	Limit  int     `form:"limit" json:"limit"`
 }
 
 // List 召集令列表
@@ -22,10 +24,21 @@ func (service *CallupMine) List(c *gin.Context) serializer.Response {
 		service.Limit = 10
 	}
 
-	total := model.DB.Model(&user).Association("Callup").Count()
+	db := model.DB.Model(&model.Callup{}).Where("sponsor_id = ?", user.ID)
+	if service.Type != nil {
+		db = db.Where("type = ?", *service.Type)
+	}
+	if service.Name != nil {
+		db = db.Where("name like ?", "%"+*service.Name+"%")
+	}
+
+	var total int64 = 0
+	if err := db.Count(&total).Error; err != nil {
+		return serializer.Err(serializer.CodeDBError, "接令请求列表查询失败", err)
+	}
 
 	var callups []model.Callup
-	if err := model.DB.Where("sponsor_id = ?", user.ID).Limit(service.Limit).Offset(service.Offset).Find(&callups).Error; err != nil {
+	if err := db.Limit(service.Limit).Offset(service.Offset).Find(&callups).Error; err != nil {
 		return serializer.Err(serializer.CodeDBError, "召集令列表查询失败", err)
 	}
 
