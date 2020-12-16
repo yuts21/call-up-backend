@@ -48,6 +48,7 @@ func NewRouter() *gin.Engine {
 
 			auth.POST("callup/info", api.CallupInfo)
 			auth.POST("callup/pic", api.CallupPicture)
+			auth.POST("callup/list", api.CallupList)
 
 			// 需要普通用户权限的
 			userAuth := auth.Group("")
