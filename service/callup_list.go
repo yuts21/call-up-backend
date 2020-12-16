@@ -26,7 +26,7 @@ func (service *CallupList) List(c *gin.Context) serializer.Response {
 		db = db.Where("type = ?", *service.Type)
 	}
 	if service.Name != nil {
-		db = db.Where("name like ?", "%" + *service.Name + "%")
+		db = db.Where("name like ?", "%"+*service.Name+"%")
 	}
 
 	var total int64 = 0
