@@ -21,7 +21,9 @@ type AgencyProfitList struct {
 func (service *AgencyProfitList) List(c *gin.Context) serializer.Response {
 	var agencyProfits []model.AgencyProfit
 	if err := model.DB.
-		Where("success_date >= ? and success_date <= ?", time.Unix(service.StartDate, 0), time.Unix(service.EndDate, 0)).
+		Where("success_date >= ? and success_date <= ? and province = ? and city = ? and type = ?",
+			time.Unix(service.StartDate, 0), time.Unix(service.EndDate, 0),
+			service.Province, service.City, service.Type).
 		Find(&agencyProfits).Error; err != nil {
 		return serializer.Err(serializer.CodeDBError, "中介收益查询失败", err)
 	}
