@@ -82,6 +82,8 @@ func (service *CallupRequestHandle) Handle(c *gin.Context) serializer.Response {
 	}
 
 	if uint(count) >= callup.Capacity {
+		date := time.Now()
+		date = time.Date(date.Year(), date.Month(), date.Day(), 0, 0, 0, 0, time.Local)
 		successCallupDetail := model.SuccessCallupDetail{
 			CallupID:          callup.ID,
 			Date:              time.Now(),
@@ -94,7 +96,7 @@ func (service *CallupRequestHandle) Handle(c *gin.Context) serializer.Response {
 		}
 
 		var agencyProfit model.AgencyProfit
-		if err := tx.Where("success_date = ? and province = ? and city = ? and type = ?", successCallupDetail.Date, user.Province, user.City, callup.Type).First(&agencyProfit).Error; err != nil {
+		if err := tx.Where("success_date = ? and province = ? and city = ? and type = ?", date, user.Province, user.City, callup.Type).First(&agencyProfit).Error; err != nil {
 			if !errors.Is(err, gorm.ErrRecordNotFound) {
 				tx.Rollback()
 				return serializer.Err(serializer.CodeDBError, "中介收益查询失败", err)
