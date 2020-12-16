@@ -9,7 +9,7 @@ import (
 
 // CallupDelete 删除召集令服务
 type CallupDelete struct {
-	ID uint `form:"ID" json:"ID" binding:"required"`
+	ID uint `form:"id" json:"id" binding:"required"`
 }
 
 // Delete 删除召集令函数

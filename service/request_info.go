@@ -9,7 +9,7 @@ import (
 
 // RequestInfo 接令请求查询服务
 type RequestInfo struct {
-	ID uint `form:"ID" json:"ID" binding:"required"`
+	ID uint `form:"id" json:"id" binding:"required"`
 }
 
 // Info 查询接令请求

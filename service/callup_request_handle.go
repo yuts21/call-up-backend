@@ -84,9 +84,9 @@ func (service *CallupRequestHandle) Handle(c *gin.Context) serializer.Response {
 		date := time.Now()
 		date = time.Date(date.Year(), date.Month(), date.Day(), 0, 0, 0, 0, time.Local)
 		successCallupDetail := model.SuccessCallupDetail{
-			CallupID: callup.ID,
-			Date: date,
-			SponsorProfit: 3 * uint(count),
+			CallupID:          callup.ID,
+			Date:              date,
+			SponsorProfit:     3 * uint(count),
 			ParticipantProfit: 1 * uint(count),
 		}
 		if err := tx.Create(&successCallupDetail).Error; err != nil {
@@ -101,12 +101,12 @@ func (service *CallupRequestHandle) Handle(c *gin.Context) serializer.Response {
 				return serializer.Err(serializer.CodeDBError, "中介收益查询失败", err)
 			} else {
 				agencyProfit := model.AgencyProfit{
-					SuccessDate: date,
-					Province: user.Province,
-					City: user.City,
-					Type: callup.Type,
+					SuccessDate:  date,
+					Province:     user.Province,
+					City:         user.City,
+					Type:         callup.Type,
 					CompletedNum: 1,
-					Profit: successCallupDetail.SponsorProfit + successCallupDetail.ParticipantProfit,
+					Profit:       successCallupDetail.SponsorProfit + successCallupDetail.ParticipantProfit,
 				}
 				if err := tx.Create(&agencyProfit).Error; err != nil {
 					tx.Rollback()

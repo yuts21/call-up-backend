@@ -10,12 +10,14 @@ type CallupInfo struct {
 	Name        string `json:"name"`
 	Description string `json:"descrpt"`
 	Capacity    uint   `json:"cap"`
+	Province    string `json:"province"`
+	City        string `json:"city"`
 	EndDate     int64  `json:"end_date"`
 	Status      uint8  `json:"status"`
 }
 
 // BuildCallupInfoResponse 序列化召集令信息响应
-func BuildCallupInfoResponse(callup model.Callup) Response {
+func BuildCallupInfoResponse(callup model.Callup, sponsor model.User) Response {
 	return Response{
 		Code: CodeSuccess,
 		Data: CallupInfo{
@@ -23,6 +25,8 @@ func BuildCallupInfoResponse(callup model.Callup) Response {
 			Name:        callup.Name,
 			Description: callup.Description,
 			Capacity:    callup.Capacity,
+			Province:    sponsor.Province,
+			City:        sponsor.City,
 			EndDate:     callup.EndDate.Unix(),
 			Status:      callup.Status(),
 		},

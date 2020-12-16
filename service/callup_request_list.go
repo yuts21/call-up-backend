@@ -9,7 +9,7 @@ import (
 
 // CallupRequestList 召集令请求列表服务
 type CallupRequestList struct {
-	ID uint `form:"ID" json:"ID" binding:"required"`
+	ID uint `form:"id" json:"id" binding:"required"`
 	Offset int `form:"offset" json:"offset"`
 	Limit  int `form:"limit" json:"limit"`
 }
@@ -31,7 +31,7 @@ func (service *CallupRequestList) List(c *gin.Context) serializer.Response {
 	total := model.DB.Model(&callup).Association("Request").Count()
 
 	var results []serializer.CallupRequestListItem
-	if err := model.DB.Model(&model.Request{}).Select("requests.id as request_id, requests.requester_id as requester_id, users.name as requester_name, requests.status as status").
+	if err := model.DB.Model(&model.Request{}).Select("requests.id as id, requests.requester_id as requester_id, users.name as requester_name, requests.status as status").
 		Joins("join users on requests.requester_id = users.id").
 		Where("callup_id = ?", callup.ID).
 		Limit(service.Limit).

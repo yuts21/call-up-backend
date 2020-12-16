@@ -9,7 +9,7 @@ import (
 
 // RequestDelete 接令请求删除服务
 type RequestDelete struct {
-	ID uint `form:"ID" json:"ID" binding:"required"`
+	ID uint `form:"id" json:"id" binding:"required"`
 }
 
 // Delete 删除接令请求

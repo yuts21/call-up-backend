@@ -19,6 +19,7 @@ type User struct {
 	Introduction   string `gorm:"type:text"`
 	Province       string
 	City           string
+	Callup         []Callup `gorm:"foreignKey:SponsorID"`
 	Request        []Request `gorm:"foreignKey:RequesterID"`
 }
 

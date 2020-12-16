@@ -9,7 +9,7 @@ import (
 
 // RequestCancel 接令请求取消服务
 type RequestCancel struct {
-	ID uint `form:"ID" json:"ID" binding:"required"`
+	ID uint `form:"id" json:"id" binding:"required"`
 }
 
 // Cancel 取消接令请求

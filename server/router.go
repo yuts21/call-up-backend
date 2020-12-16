@@ -46,14 +46,16 @@ func NewRouter() *gin.Engine {
 			auth.POST("user/updatePasswd", api.UserPasswordUpdate)
 			auth.POST("user/updateInfo", api.UserInfoUpdate)
 
+			auth.POST("callup/info", api.CallupInfo)
+			auth.POST("callup/pic", api.CallupPicture)
+
 			// 需要普通用户权限的
 			userAuth := auth.Group("")
 			{
 				userAuth.Use(middleware.UserAuth())
 				userAuth.POST("callup/create", api.CallupCreate)
-				userAuth.POST("callup/info", api.CallupInfo)
-				userAuth.POST("callup/pic", api.CallupPicture)
 				userAuth.POST("callup/update", api.CallupUpdate)
+				userAuth.POST("callup/mine", api.CallupMine)
 				userAuth.POST("callup/cancel", api.CallupCancel)
 				userAuth.DELETE("callup/delete", api.CallupDelete)
 				userAuth.POST("callup/req/info", api.CallupRequestInfo)

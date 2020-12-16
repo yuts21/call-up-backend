@@ -10,7 +10,7 @@ import (
 
 // CallupUpdate 修改召集令服务
 type CallupUpdate struct {
-	ID          uint    `form:"ID" json:"ID" binding:"required"`
+	ID          uint    `form:"id" json:"id" binding:"required"`
 	Type        *uint8  `form:"type" json:"type"`
 	Name        *string `form:"name" json:"name"`
 	Description *string `form:"descrpt" json:"descrpt"`
