@@ -29,6 +29,17 @@ func UserInfo(c *gin.Context) {
 	}
 }
 
+// UserList 用户列表
+func UserList(c *gin.Context) {
+	var serv service.UserList
+	if err := c.ShouldBind(&serv); err == nil {
+		res := serv.List(c)
+		c.JSON(http.StatusOK, res)
+	} else {
+		c.JSON(http.StatusOK, ErrorResponse(err))
+	}
+}
+
 // UserPasswordUpdate 修改密码
 func UserPasswordUpdate(c *gin.Context) {
 	var serv service.UserPasswordUpdate

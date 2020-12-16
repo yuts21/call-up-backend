@@ -3,6 +3,7 @@ package service
 import (
 	"call-up/model"
 	"call-up/serializer"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,27 +20,24 @@ type AgencyProfitList struct {
 // List 中介收益信息函数
 func (service *AgencyProfitList) List(c *gin.Context) serializer.Response {
 	var agencyProfits []model.AgencyProfit
-	db := model.DB.Model(&model.Callup{})
 
+	db := model.DB.Model(&model.AgencyProfit{})
 	if service.StartDate != nil {
-		db = db.Where("start_date >= ?", *service.StartDate)
+		db = db.Where("success_date >= ?", time.Unix(*service.StartDate, 0))
 	}
-
 	if service.EndDate != nil {
-		db = db.Where("end_date >= ?", *service.EndDate)
+		db = db.Where("success_date <= ?", time.Unix(*service.EndDate, 0))
 	}
-
 	if service.Province != nil {
-		db = db.Where("province >= ?", *service.Province)
+		db = db.Where("province = ?", *service.Province)
 	}
-
 	if service.City != nil {
-		db = db.Where("city >= ?", *service.City)
+		db = db.Where("city = ?", *service.City)
+	}
+	if service.Type != nil {
+		db = db.Where("type = ?", *service.Type)
 	}
 
-	if service.Type != nil {
-		db = db.Where("type >= ?", *service.Type)
-	}
 	if err := db.Find(&agencyProfits).Error; err != nil {
 		return serializer.Err(serializer.CodeDBError, "中介收益查询失败", err)
 	}
