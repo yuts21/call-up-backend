@@ -5,9 +5,10 @@ import (
 	"call-up/model"
 	"call-up/serializer"
 	"errors"
-	"gorm.io/gorm"
 	"strconv"
 	"time"
+
+	"gorm.io/gorm"
 
 	"github.com/gin-gonic/gin"
 )
@@ -82,9 +83,9 @@ func (service *CallupRequestHandle) Handle(c *gin.Context) serializer.Response {
 
 	if uint(count) >= callup.Capacity {
 		successCallupDetail := model.SuccessCallupDetail{
-			CallupID: callup.ID,
-			Date: time.Now(),
-			SponsorProfit: 3 * uint(count),
+			CallupID:          callup.ID,
+			Date:              time.Now(),
+			SponsorProfit:     3 * uint(count),
 			ParticipantProfit: 1 * uint(count),
 		}
 		if err := tx.Create(&successCallupDetail).Error; err != nil {
@@ -99,12 +100,12 @@ func (service *CallupRequestHandle) Handle(c *gin.Context) serializer.Response {
 				return serializer.Err(serializer.CodeDBError, "中介收益查询失败", err)
 			} else {
 				agencyProfit := model.AgencyProfit{
-					SuccessDate: successCallupDetail.Date,
-					Province: user.Province,
-					City: user.City,
-					Type: callup.Type,
+					SuccessDate:  successCallupDetail.Date,
+					Province:     user.Province,
+					City:         user.City,
+					Type:         callup.Type,
 					CompletedNum: 1,
-					Profit: successCallupDetail.SponsorProfit + successCallupDetail.ParticipantProfit,
+					Profit:       successCallupDetail.SponsorProfit + successCallupDetail.ParticipantProfit,
 				}
 				if err := tx.Create(&agencyProfit).Error; err != nil {
 					tx.Rollback()

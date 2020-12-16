@@ -9,9 +9,9 @@ import (
 
 // CallupRequestList 召集令请求列表服务
 type CallupRequestList struct {
-	ID uint `form:"ID" json:"ID" binding:"required"`
-	Offset int `form:"offset" json:"offset"`
-	Limit  int `form:"limit" json:"limit"`
+	ID     uint `form:"ID" json:"ID" binding:"required"`
+	Offset int  `form:"offset" json:"offset"`
+	Limit  int  `form:"limit" json:"limit"`
 }
 
 // List 召集令请求列表

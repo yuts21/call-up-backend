@@ -4,6 +4,7 @@ import (
 	"call-up/model"
 	"call-up/serializer"
 	"errors"
+
 	"gorm.io/gorm"
 
 	"github.com/gin-gonic/gin"
@@ -35,7 +36,7 @@ func (service *RequestCreate) Create(c *gin.Context) serializer.Response {
 			return serializer.Err(serializer.CodeDBError, "接令请求查询失败", nil)
 		}
 	} else {
-		if request.Status == model.Unprocessed || request.Status == model.Agreed  {
+		if request.Status == model.Unprocessed || request.Status == model.Agreed {
 			return serializer.Err(serializer.CodeParamErr, "该召集令已有待处理或已通过的请求", nil)
 		}
 	}
