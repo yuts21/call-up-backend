@@ -7,14 +7,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// RequestUpdate 接令请求修改服务
-type RequestUpdate struct {
-	ID   uint   `form:"ID" json:"ID" binding:"required"`
-	Description string `form:"descrpt" json:"descrpt"`
+// RequestCancel 接令请求取消服务
+type RequestCancel struct {
+	ID uint `form:"ID" json:"ID" binding:"required"`
 }
 
-// Update 修改接令请求
-func (service *RequestUpdate) Update(c *gin.Context) serializer.Response {
+// Cancel 取消接令请求
+func (service *RequestCancel) Cancel(c *gin.Context) serializer.Response {
 	curUser, _ := c.Get("user")
 	user := curUser.(*model.User)
 
@@ -27,10 +26,10 @@ func (service *RequestUpdate) Update(c *gin.Context) serializer.Response {
 		return serializer.Err(serializer.CodeParamErr, "接令请求不处于未处理状态", nil)
 	}
 
-	if err := model.DB.Model(&request).Update("description", service.Description).Error; err != nil {
-		return serializer.Err(serializer.CodeDBError, "接令请求修改失败", err)
+	if err := model.DB.Model(&request).Update("status", model.Abolished).Error; err != nil {
+		return serializer.Err(serializer.CodeDBError, "接令请求取消失败", err)
 	}
 
-	resp := serializer.Success("修改成功")
+	resp := serializer.Success("取消成功")
 	return resp
 }

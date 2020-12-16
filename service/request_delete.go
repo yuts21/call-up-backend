@@ -22,9 +22,11 @@ func (service *RequestDelete) Delete(c *gin.Context) serializer.Response {
 		return serializer.Err(serializer.CodeDBError, "接令请求查询失败", err)
 	}
 
-	if err := model.DB.
-		Where("id = ? and status != ?", request.ID, model.Agreed).
-		Delete(&model.Request{}).Error; err != nil {
+	if request.Status != model.Abolished {
+		return serializer.Err(serializer.CodeParamErr, "接令请求不处于已取消状态", nil)
+	}
+
+	if err := model.DB.Delete(&request).Error; err != nil {
 		return serializer.Err(serializer.CodeDBError, "接令请求删除失败", err)
 	}
 

@@ -51,6 +51,17 @@ func RequestUpdate(c *gin.Context) {
 	}
 }
 
+// RequestCancel 请求信息取消
+func RequestCancel(c *gin.Context) {
+	var serv service.RequestCancel
+	if err := c.ShouldBind(&serv); err == nil {
+		res := serv.Cancel(c)
+		c.JSON(http.StatusOK, res)
+	} else {
+		c.JSON(http.StatusOK, ErrorResponse(err))
+	}
+}
+
 // RequestDelete 请求信息删除
 func RequestDelete(c *gin.Context) {
 	var serv service.RequestDelete
