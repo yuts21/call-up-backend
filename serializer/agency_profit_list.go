@@ -16,7 +16,7 @@ type AgencyProfitListItem struct {
 
 // BuildAgencyProfitList 序列化中介收益列表
 func BuildAgencyProfitList(items []model.AgencyProfit) []AgencyProfitListItem {
-	var agencyProfits []AgencyProfitListItem
+	agencyProfits := []AgencyProfitListItem{}
 	for _, item := range items {
 		agencyProfit := AgencyProfitListItem{
 			Date:         item.SuccessDate.Unix(),

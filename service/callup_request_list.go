@@ -30,7 +30,7 @@ func (service *CallupRequestList) List(c *gin.Context) serializer.Response {
 
 	total := model.DB.Model(&callup).Association("Request").Count()
 
-	var results []serializer.CallupRequestListItem
+	results := []serializer.CallupRequestListItem{}
 	if err := model.DB.Model(&model.Request{}).Select("requests.id as id, requests.requester_id as requester_id, users.name as requester_name, requests.status as status").
 		Joins("join users on requests.requester_id = users.id").
 		Where("callup_id = ?", callup.ID).

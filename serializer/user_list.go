@@ -14,7 +14,7 @@ type UserListItem struct {
 }
 
 func BuildUserListResponse(users []model.User, total int64) Response {
-	var userList []UserListItem
+	userList := []UserListItem{}
 	for _, user := range users {
 		userListItem := UserListItem{
 			ID:       user.ID,

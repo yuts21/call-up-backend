@@ -53,7 +53,7 @@ func (service *CallupProfitList) List(c *gin.Context) serializer.Response {
 		return serializer.Err(serializer.CodeDBError, "召集令收益查询失败", err)
 	}
 
-	var resultdata []serializer.CallupProfitListItemData
+	resultdata := []serializer.CallupProfitListItemData{}
 	if err := db.
 		Select(`success_callup_details.callup_id as callup_id, callups.name as callup_name, 
 		callups.sponsor_id as sponsor_id, users.name as sponsor_name, success_callup_details.date as date,

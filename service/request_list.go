@@ -24,7 +24,7 @@ func (service *RequestList) List(c *gin.Context) serializer.Response {
 
 	total := model.DB.Model(&requester).Association("Request").Count()
 
-	var results []serializer.RequestListItem
+	results := []serializer.RequestListItem{}
 	if err := model.DB.Model(&model.Request{}).
 		Select(`requests.id as id, requests.callup_id as callup_id, 
 		callups.name as callup_name, requests.status as status`).

@@ -13,7 +13,7 @@ type CallupListItem struct {
 }
 
 func BuildCallupListResponse(callups []model.Callup, total int64) Response {
-	var callupList []CallupListItem
+	callupList := []CallupListItem{}
 	for _, callup := range callups {
 		callupListItem := CallupListItem{
 			ID: callup.ID,

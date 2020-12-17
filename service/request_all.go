@@ -24,7 +24,7 @@ func (service *RequestAll) List(c *gin.Context) serializer.Response {
 		return serializer.Err(serializer.CodeDBError, "接令请求列表查询失败", err)
 	}
 
-	var results []serializer.RequestAllItem
+	results := []serializer.RequestAllItem{}
 	if err := model.DB.Model(&model.Request{}).Select(`requests.id as id, requests.callup_id as callup_id, callups.name as callup_name, 
 		requests.requester_id as requester_id, users.name as requester_name, requests.status as status`).
 		Joins("join callups on requests.callup_id = callups.id").

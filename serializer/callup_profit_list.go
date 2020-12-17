@@ -41,7 +41,7 @@ type CallupProfitListItemData struct {
 }
 
 func BuildCallupProfitList(data []CallupProfitListItemData) []CallupProfitListItem {
-	var results []CallupProfitListItem
+	results := []CallupProfitListItem{}
 	for _, item := range data {
 		resultItem := CallupProfitListItem{
 			CallupID:          item.CallupID,

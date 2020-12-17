@@ -19,7 +19,7 @@ type AgencyProfitList struct {
 
 // List 中介收益信息函数
 func (service *AgencyProfitList) List(c *gin.Context) serializer.Response {
-	var agencyProfits []model.AgencyProfit
+	agencyProfits := []model.AgencyProfit{}
 
 	db := model.DB.Model(&model.AgencyProfit{})
 	if service.StartDate != nil {

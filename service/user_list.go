@@ -24,7 +24,7 @@ func (service *UserList) List(c *gin.Context) serializer.Response {
 		return serializer.Err(serializer.CodeDBError, "接令请求列表查询失败", err)
 	}
 
-	var users []model.User
+	users := []model.User{}
 	if err := model.DB.Limit(service.Limit).Offset(service.Offset).Find(&users).Error; err != nil {
 		return serializer.Err(serializer.CodeDBError, "召集令列表查询失败", err)
 	}

@@ -37,7 +37,7 @@ func (service *CallupMine) List(c *gin.Context) serializer.Response {
 		return serializer.Err(serializer.CodeDBError, "召集令列表查询失败", err)
 	}
 
-	var callups []model.Callup
+	callups := []model.Callup{}
 	if err := db.Limit(service.Limit).Offset(service.Offset).Find(&callups).Error; err != nil {
 		return serializer.Err(serializer.CodeDBError, "召集令列表查询失败", err)
 	}
