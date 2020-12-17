@@ -14,8 +14,8 @@ type UserRegister struct {
 	IDNumber     string `form:"id_number" json:"id_number" binding:"required"`
 	Phone        string `form:"phone" json:"phone" binding:"required,len=11"`
 	Introduction string `form:"intro" json:"intro"`
-	Province     string `form:"province" json:"province"`
-	City         string `form:"city" json:"city"`
+	Province     string `form:"province" json:"province" binding:"required"`
+	City         string `form:"city" json:"city" binding:"required"`
 }
 
 // Register 用户注册
