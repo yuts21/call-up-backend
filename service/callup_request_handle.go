@@ -37,9 +37,13 @@ func (service *CallupRequestHandle) Handle(c *gin.Context) serializer.Response {
 		return serializer.Err(serializer.CodeNoRightErr, "无权限", nil)
 	}
 
+	if request.Status != model.Unprocessed {
+		return serializer.Err(serializer.CodeParamErr, "接令请求不在待处理状态", nil)
+	}
+
 	status := callup.Status()
 	if status == model.Expired || status == model.Canceled {
-		return serializer.Err(serializer.CodeParamErr, "召集令已逾期", nil)
+		return serializer.Err(serializer.CodeParamErr, "召集令不可用", nil)
 	}
 
 	if service.Instruction == 2 {
