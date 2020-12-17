@@ -29,10 +29,14 @@ func (service *CallupProfitList) List(c *gin.Context) serializer.Response {
 		Joins("join callups on success_callup_details.callup_id = callups.id").
 		Joins("join users on callups.sponsor_id = users.id")
 	if service.StartDate != nil {
-		db = db.Where("success_callup_details.date >= ?", time.Unix(*service.StartDate, 0))
+		date := time.Unix(*service.StartDate, 0)
+		date = time.Date(date.Year(), date.Month(), date.Day(), 0, 0, 0, 0, time.Local)
+		db = db.Where("success_callup_details.date >= ?", date)
 	}
 	if service.EndDate != nil {
-		db = db.Where("success_callup_details.date <= ?", time.Unix(*service.EndDate, 0))
+		date := time.Unix(*service.EndDate, 0)
+		date = time.Date(date.Year(), date.Month(), date.Day(), 0, 0, 0, 0, time.Local)
+		db = db.Where("success_callup_details.date <= ?", date)
 	}
 	if service.Province != nil {
 		db = db.Where("users.province = ?", *service.Province)

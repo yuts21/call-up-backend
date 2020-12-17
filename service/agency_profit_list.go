@@ -23,10 +23,14 @@ func (service *AgencyProfitList) List(c *gin.Context) serializer.Response {
 
 	db := model.DB.Model(&model.AgencyProfit{})
 	if service.StartDate != nil {
-		db = db.Where("success_date >= ?", time.Unix(*service.StartDate, 0))
+		date := time.Unix(*service.StartDate, 0)
+		date = time.Date(date.Year(), date.Month(), date.Day(), 0, 0, 0, 0, time.Local)
+		db = db.Where("success_date >= ?", date)
 	}
 	if service.EndDate != nil {
-		db = db.Where("success_date <= ?", time.Unix(*service.EndDate, 0))
+		date := time.Unix(*service.EndDate, 0)
+		date = time.Date(date.Year(), date.Month(), date.Day(), 0, 0, 0, 0, time.Local)
+		db = db.Where("success_date <= ?", date)
 	}
 	if service.Province != nil {
 		db = db.Where("province = ?", *service.Province)
