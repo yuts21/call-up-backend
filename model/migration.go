@@ -20,7 +20,7 @@ func migration() {
 			UserID:   adminID,
 			Type:     true,
 			Name:     "Administrator",
-			IDType:   0,
+			IDType:   1,
 			Phone:    "00000000000",
 			Level:    2,
 			Province: "北京市",
