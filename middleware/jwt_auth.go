@@ -46,8 +46,9 @@ func GinJWTMiddlewareInit() (authMiddleware *jwt.GinJWTMiddleware, err error) {
 			return jwt.MapClaims{}
 		},
 		LoginResponse: func(c *gin.Context, code int, token string, expire time.Time) {
-			user, _ := c.Get("user")
-			c.JSON(code, serializer.BuildUserLoginResponse(user.(*model.User).ID, token, expire))
+			curUser, _ := c.Get("user")
+			user := curUser.(*model.User)
+			c.JSON(code, serializer.BuildUserLoginResponse(user.ID, user.Type, token, expire))
 		},
 		IdentityHandler: func(c *gin.Context) interface{} {
 			claims := jwt.ExtractClaims(c)
@@ -75,8 +76,9 @@ func GinJWTMiddlewareInit() (authMiddleware *jwt.GinJWTMiddleware, err error) {
 			c.JSON(code, serializer.Err(serializer.CodeCheckLogin, message, nil))
 		},
 		RefreshResponse: func(c *gin.Context, code int, token string, expire time.Time) {
-			user, _ := c.Get("user")
-			c.JSON(code, serializer.BuildUserLoginResponse(user.(*model.User).ID, token, expire))
+			curUser, _ := c.Get("user")
+			user := curUser.(*model.User)
+			c.JSON(code, serializer.BuildUserLoginResponse(user.ID, user.Type, token, expire))
 		},
 		// TokenLookup is a string in the form of "<source>:<name>" that is used
 		// to extract token from the request.
