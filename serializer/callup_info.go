@@ -15,6 +15,7 @@ type CallupInfo struct {
 	Province    string `json:"province"`
 	City        string `json:"city"`
 	EndDate     int64  `json:"end_date"`
+	PicturePath string `json:"pic"`
 	Status      uint8  `json:"status"`
 }
 
@@ -32,6 +33,7 @@ func BuildCallupInfoResponse(callup model.Callup, sponsor model.User) Response {
 			Province:    sponsor.Province,
 			City:        sponsor.City,
 			EndDate:     callup.EndDate.Unix(),
+			PicturePath: callup.PicturePath,
 			Status:      callup.Status(),
 		},
 	}

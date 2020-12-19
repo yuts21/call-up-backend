@@ -46,8 +46,7 @@ func (service *CallupCreate) Create(c *gin.Context) serializer.Response {
 	}
 
 	picName := "callup_" + strconv.FormatUint(uint64(callup.ID), 10) + filepath.Ext(picture.Filename)
-	picName = path.Join(conf.FilePath, picName)
-	if err := c.SaveUploadedFile(picture, picName); err != nil {
+	if err := c.SaveUploadedFile(picture, path.Join(conf.FilePath, picName)); err != nil {
 		return serializer.Err(serializer.CodeFileUploadError, "照片上传失败", err)
 	}
 

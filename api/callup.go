@@ -51,16 +51,6 @@ func CallupInfo(c *gin.Context) {
 	}
 }
 
-// CallupPicture 召集令图片查询
-func CallupPicture(c *gin.Context) {
-	var serv service.CallupPicture
-	if err := c.ShouldBind(&serv); err == nil {
-		serv.GetPicture(c)
-	} else {
-		c.JSON(http.StatusOK, ErrorResponse(err))
-	}
-}
-
 // CallupUpdate 召集令修改
 func CallupUpdate(c *gin.Context) {
 	var serv service.CallupUpdate

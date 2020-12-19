@@ -2,8 +2,10 @@ package server
 
 import (
 	"call-up/api"
+	"call-up/conf"
 	"call-up/middleware"
 	"log"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -11,6 +13,8 @@ import (
 // NewRouter 路由配置
 func NewRouter() *gin.Engine {
 	r := gin.Default()
+
+	r.StaticFS("/api/pic", http.Dir(conf.FilePath))
 
 	// 中间件, 顺序不能改
 	r.Use(middleware.Cors())
@@ -47,7 +51,6 @@ func NewRouter() *gin.Engine {
 			auth.POST("user/updateInfo", api.UserInfoUpdate)
 
 			auth.POST("callup/info", api.CallupInfo)
-			auth.POST("callup/pic", api.CallupPicture)
 			auth.POST("callup/list", api.CallupList)
 
 			// 需要普通用户权限的
