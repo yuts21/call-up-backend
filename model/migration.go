@@ -24,7 +24,7 @@ func migration() {
 			Phone:    "00000000000",
 			Level:    2,
 			Province: "北京市",
-			City:     "海淀区",
+			City:     "北京市",
 		}
 		if err := admin.SetPassword(adminPassword); err != nil {
 			log.Fatal("管理员密码加密失败", err.Error())
