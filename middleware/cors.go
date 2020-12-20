@@ -14,7 +14,9 @@ func Cors() gin.HandlerFunc {
 	config.AllowHeaders = []string{"Origin", "Content-Length", "Content-Type", "Cookie", "Authorization"}
 	if gin.Mode() == gin.ReleaseMode {
 		// 生产环境需要配置跨域域名，否则403
-		config.AllowOrigins = []string{"http://yts1999.top:2000", "http://www.yts1999.top:2000", "http://39.106.48.217:2000"}
+		config.AllowOrigins = []string{"http://yts1999.top:8080", "http://www.yts1999.top:8080",
+			"http://yuts.tech:8080", "http://www.yuts.tech:8080",
+			"http://39.106.48.217:8080"}
 	} else {
 		// 测试环境下模糊匹配本地开头的请求
 		config.AllowOriginFunc = func(origin string) bool {
